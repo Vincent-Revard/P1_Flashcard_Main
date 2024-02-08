@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Flash Cards </title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script defer type="module" src="./src/index.js"></script>
 </head>
 <body>
-
+    <div>
+        <h1>Flashcards for Coding</h1>
+    </div>
+    <div id="categories"> Other Categories: </div>
+    <div id="flashcards"></div>
+    <form id="new-flashcards">
+        <label for="new-question">question: </label>
+        <input type="text" name="question" id="new-question" />
+        <label for="new-example">example: </label>
+        <input type="text" name="example" id="new-example" />
+        <label for="new-answer">answer: </label>
+        <input type="text" name="answer" id="new-answer" />
+    </form>
+    <button id="nextbtn"></button>
 </body>
 </html>
