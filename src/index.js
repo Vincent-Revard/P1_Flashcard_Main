@@ -3,22 +3,47 @@ const url = 'http://localhost:3000/flashCards'
 const flashcard = document.querySelector('#flashcard')
 const allCards = document.querySelector('#allcards')
 const newFlashcard = document.querySelector('#new-flashcard')
-const nextBtn = document.querySelector('#nextbtn')
+const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
+const startBtn = document.querySelector('#startbtn')
+
 
 
 
 //Add Codes
 
-const handleClick = () => {
-    console.log("I've been clicked")
-}
+const javaScript = document.createElement('p')
+javaScript.innerText = 'JavaScript'
+const html = document.createElement('p')
+html.innerText = 'HTML'
+const css = document.createElement('p')
+css.innerText = 'CSS'
+categories.append(javaScript, html, css)
+
+
 
 const displayFlashcard = (flashcardObj) => {
-    const flashcardInfo = document.createElement('li')
-    flashcardInfo.innerText = flashcardObj.question
-    flashcardInfo.addEventListener('click', (e) => handleClick(flashcardObj))
-    flashcard.append(flashcardInfo)
+    const flashcardQuestion = document.createElement('p')
+    const flashcardExample = document.createElement('p')
+    const flashcardAnswer = document.createElement('p')
+    flashcardQuestion.innerText = flashcardObj.question
+    flashcardExample.innerText = flashcardObj.example
+    flashcardAnswer.innerText = flashcardObj.answer
+    flashcard.append(flashcardQuestion, flashcardExample, flashcardAnswer)
+}
+
+const nextBtn = () => {
+
+}
+
+const handleStart = () => {
+    startBtn.addEventListener('click', (e) => {
+        getJSON(url)
+        .then((flashcardsData => {
+            displayFlashcard(flashcardsData[0])
+            flashcardsData.forEach(flashcard => nextBtn(flashcard))
+        })) 
+    })
 }
 
 //Index Helper
@@ -34,14 +59,7 @@ const getJSON = (url) => {
     })
 }
 
-const getFlashcards = () => {
-    getJSON(url)
-    .then((flashcardsData => {
-        // handleClick(flashcardsData[0])
-        flashcardsData.forEach((flashcard) => displayFlashcard(flashcard))
-    }))
-}
+handleStart()
 
-getFlashcards()
 
 
