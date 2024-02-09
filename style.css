@@ -3,9 +3,22 @@ h1 {
 }
 
 body{
-    background-color: rgb(255, 255, 177);
+    background-color: white;
 }
 
 li{
     cursor: pointer;
+}
+
+.buttonDiv{
+    text-align: center;
+}
+
+#flashcard{
+    text-align: center;
+    background-color: rgb(255, 255, 177);
+}
+
+#flashcard p{
+    padding: 20px,
 }

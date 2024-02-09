@@ -7,8 +7,13 @@ const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const startBtn = document.querySelector('#startbtn')
 
-
-
+//! Looping
+let i = 0;
+const triggerNextBtn = (flashcardObj) => {
+    if(i > flashcardObj.length);
+    i++
+    displayFlashcard(flashcardObj[i]);
+    }
 
 //Add Codes
 
@@ -31,25 +36,24 @@ const displayFlashcard = (flashcardObj) => {
     const flashcardAnswer = document.createElement('p')
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
+
+    //! Cycle through all data with click of next button
     nextBtn.addEventListener('click', () => {
-        
+        getJSON(url)
+        .then((flashcardsData => {
+            triggerNextBtn(flashcardsData)
+        }))
     })
     nextBtn.innerText = 'NEXT CARD'
     
     flashcardQuestion.innerText = flashcardObj.question
     flashcardExample.innerText = flashcardObj.example
     flashcardAnswer.innerText = flashcardObj.answer
-    flashcard.append(flashcardQuestion, flashcardExample, flashcardAnswer,nextBtn)
+    flashcard.append(flashcardQuestion, flashcardExample, flashcardAnswer, nextBtn)
 }
 
 //! Triggers next button and shows next object in database
-//* Display different card
-const triggerNextBtn = (flashcardObj) => {
-    let i = 0;
-    if(i < 0) i = flashcardObj.length;
-    i++;
-    displayFlashcard(flashcardObj);
-    }
+
 
 //! Triggers Start button
 const handleStart = () => {
@@ -57,8 +61,6 @@ const handleStart = () => {
         getJSON(url)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
-            triggerNextBtn(flashcardsData)
-            // flashcardsData.forEach(flashcard => triggerNextBtn(flashcard))
         })) 
     })
 }
