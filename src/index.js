@@ -10,10 +10,12 @@ const startBtn = document.querySelector('#startbtn')
 //! Looping
 let i = 0;
 const triggerNextBtn = (flashcardObj) => {
-    if(i > flashcardObj.length);
-    i++
-    displayFlashcard(flashcardObj[i]);
+    if (i < flashcardObj.length){
+        displayFlashcard(flashcardObj[i]);
+        i++
     }
+}
+//* make conditional to STOP after obj.length
 
 //Add Codes
 
@@ -30,12 +32,33 @@ categories.append(javaScript, html, css)
 //* We still need to figure out NEXT data on NEXT button click
 //* Hide start button after start button activated
 const displayFlashcard = (flashcardObj) => {
+    //! Empties out the webpage
     flashcard.innerHTML = ''
+    //! Creating elements to our flashcard
     const flashcardQuestion = document.createElement('p')
     const flashcardExample = document.createElement('p')
     const flashcardAnswer = document.createElement('p')
+    const exampleButton = document.createElement('button')
+
+    //! setting attribute and text of the buttons
+    exampleButton.setAttribute('data-id', flashcardObj.id)
+    exampleButton.innerText = 'hint?'
+    const answerButton = document.createElement('button')
+    answerButton.setAttribute('data-id', flashcardObj.id)
+    answerButton.innerText = 'Click me for the answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
+
+    const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
+    const selectSecondbtnA = document.querySelector(`div#flashcard > .p > button > button[data-id='${flashcardObj.id}']`)
+
+    exampleButton.addEventListener('click', () => {
+        exampleButton.innerText = flashcardObj.example
+    })
+
+    answerButton.addEventListener('click', () => {
+        answerButton.innerText = flashcardObj.answer
+    })
 
     //! Cycle through all data with click of next button
     nextBtn.addEventListener('click', () => {
@@ -49,7 +72,7 @@ const displayFlashcard = (flashcardObj) => {
     flashcardQuestion.innerText = flashcardObj.question
     flashcardExample.innerText = flashcardObj.example
     flashcardAnswer.innerText = flashcardObj.answer
-    flashcard.append(flashcardQuestion, flashcardExample, flashcardAnswer, nextBtn)
+    flashcard.append(flashcardQuestion, exampleButton, answerButton, nextBtn)
 }
 
 //! Triggers next button and shows next object in database
@@ -58,6 +81,7 @@ const displayFlashcard = (flashcardObj) => {
 //! Triggers Start button
 const handleStart = () => {
     startBtn.addEventListener('click', (e) => {
+        i = 0;
         getJSON(url)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
