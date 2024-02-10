@@ -53,11 +53,11 @@ const displayFlashcard = (flashcardObj) => {
     const selectSecondbtnA = document.querySelector(`div#flashcard > .p > button > button[data-id='${flashcardObj.id}']`)
 
     exampleButton.addEventListener('click', () => {
-        console.log("I've been clicked")
+        exampleButton.innerText = flashcardObj.example
     })
 
-    answerButton.addEventListener('keydown', () => {
-        console.log('a key was prssed down')
+    answerButton.addEventListener('click', () => {
+        answerButton.innerText = flashcardObj.answer
     })
 
     //! Cycle through all data with click of next button
