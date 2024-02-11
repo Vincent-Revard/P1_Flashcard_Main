@@ -10,8 +10,6 @@ const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const startBtn = document.querySelector('#startbtn')
 const sideBar = document.querySelector("#sidebar")
-const sideBarClassName = document.querySelector("#sidebar").className
-
 const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 
@@ -168,8 +166,8 @@ const addNewFlashcardJavascript = (e) => {
         example: e.target.elements['new-example'].value
     }
     
-    postJSON(url, addedNewFlashcard)
-        .then((createdFlashCard) => handleStart())
+    postJSON(`${url}${sideBar.className}`, addedNewFlashcard)
+        .then((createdFlashCard) => triggerNextBtn())
         .catch(console.error)   
     e.target.reset()
 }

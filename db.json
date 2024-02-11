@@ -123,140 +123,140 @@
   ],
   "HTML": [
     {
-      "id": 21,
+      "id": "21",
       "question": "What does 'HTML' stand for?",
       "answer": "Hypertext Markup Language",
       "example": "Creating the structure of a web page.",
       "hint": "Think about the fundamental purpose of HTML in structuring content for the web."
     },
     {
-      "id": 22,
+      "id": "22",
       "question": "How do you create a hyperlink in HTML?",
       "answer": "<a href='https://example.com'>Link Text</a>",
       "example": "",
       "hint": "Consider the HTML tag used to create links and the required attributes."
     },
     {
-      "id": 23,
+      "id": "23",
       "question": "What is the purpose of the `<head>` element in HTML?",
       "answer": "Contains meta-information about the HTML document.",
       "example": "<head><title>My Web Page</title></head>",
       "hint": "Think about where meta-information and document-wide settings are placed in an HTML document."
     },
     {
-      "id": 24,
+      "id": "24",
       "question": "How do you add an image to an HTML document?",
       "answer": "<img src='image.jpg' alt='Description'>",
       "example": "",
       "hint": "Consider the HTML tag used to embed images and its required attributes."
     },
     {
-      "id": 25,
+      "id": "25",
       "question": "What is the purpose of the `<div>` element in HTML?",
       "answer": "Used to group other HTML elements together.",
       "example": "<div><p>Paragraph 1</p><p>Paragraph 2</p></div>",
       "hint": "Think about how the `<div>` element is commonly used for structuring and grouping content."
     },
     {
-      "id": 26,
+      "id": "26",
       "question": "How do you create an ordered list in HTML?",
       "answer": "<ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
       "example": "",
       "hint": "Consider the HTML tag used to create ordered lists and its structure."
     },
     {
-      "id": 27,
+      "id": "27",
       "question": "What is the purpose of the `<meta>` tag in HTML?",
       "answer": "Provides metadata about the HTML document.",
       "example": "<meta charset='UTF-8'>",
       "hint": "Think about where character encoding and other metadata are specified in an HTML document."
     },
     {
-      "id": 28,
+      "id": "28",
       "question": "How do you create a form in HTML?",
       "answer": "<form action='/submit' method='post'><label for='username'>Username:</label><input type='text' id='username' name='username'><input type='submit' value='Submit'></form>",
       "example": "",
       "hint": "Consider the HTML tags used to create forms and their attributes for defining form behavior."
     },
     {
-      "id": 29,
+      "id": "29",
       "question": "Explain the difference between `<div>` and `<span>` in HTML.",
       "answer": "`<div>` is a block-level element, and `<span>` is an inline element.",
       "example": "<div>Block-level element</div><span>Inline element</span>",
       "hint": "Think about the default display behavior of `<div>` and `<span>` and how they are used in layout."
     },
     {
-      "id": 30,
+      "id": "30",
       "question": "What is the purpose of the `<a>` element in HTML?",
       "answer": "Defines a hyperlink.",
       "example": "<a href='https://example.com'>Visit Example.com</a>",
       "hint": "Consider the HTML tag used to create hyperlinks and its attributes for specifying the destination URL."
     },
     {
-      "id": 31,
+      "id": "31",
       "question": "How do you create a table in HTML?",
       "answer": "<table><tr><th>Header 1</th><th>Header 2</th></tr><tr><td>Data 1</td><td>Data 2</td></tr></table>",
       "example": "",
       "hint": "Think about the HTML tags used to create tables, rows, and cells."
     },
     {
-      "id": 32,
+      "id": "32",
       "question": "What is the purpose of the `<footer>` element in HTML?",
       "answer": "Represents the footer of a section or page.",
       "example": "<footer>&copy; 2024 My Website</footer>",
       "hint": "Consider where footer content, such as copyright information, is typically placed in an HTML document."
     },
     {
-      "id": 33,
+      "id": "33",
       "question": "How do you add a background color to an element in HTML?",
       "answer": "Using the `style` attribute or external CSS.",
       "example": "<div style='background-color: #ffeecc;'>Colored Div</div>",
       "hint": "Think about how inline styles or external stylesheets can be used to apply background colors."
     },
     {
-      "id": 34,
+      "id": "34",
       "question": "What is the purpose of the `<iframe>` element in HTML?",
       "answer": "Embeds another document within the current HTML document.",
       "example": "<iframe src='https://example.com' width='600' height='400'></iframe>",
       "hint": "Consider scenarios where you want to embed content from another source within your HTML document."
     },
     {
-      "id": 35,
+      "id": "35",
       "question": "How do you create a line break in HTML?",
       "answer": "Using the `<br>` tag.",
       "example": "This is a line<br>break.",
       "hint": "Think about the HTML tag used to create line breaks within text."
     },
     {
-      "id": 36,
+      "id": "36",
       "question": "What is the purpose of the `<abbr>` element in HTML?",
       "answer": "Defines an abbreviation or acronym with an optional description.",
       "example": "<abbr title='Hypertext Markup Language'>HTML</abbr>",
       "hint": "Consider scenarios where you want to provide a full explanation for an abbreviation or acronym."
     },
     {
-      "id": 37,
+      "id": "37",
       "question": "How do you create a dropdown list in HTML?",
       "answer": "<select><option value='option1'>Option 1</option><option value='option2'>Option 2</option></select>",
       "example": "",
       "hint": "Think about the HTML tags used to create dropdown lists and their structure."
     },
     {
-      "id": 38,
+      "id": "38",
       "question": "Explain the purpose of the `data-*` attributes in HTML.",
       "answer": "Allows storing extra information on HTML elements.",
       "example": "<div data-userid='123'>User 123</div>",
       "hint": "Consider scenarios where you want to associate custom data with HTML elements."
     },
     {
-      "id": 39,
+      "id": "39",
       "question": "What is the purpose of the `<nav>` element in HTML?",
       "answer": "Represents a navigation menu.",
       "example": "<nav><a href='/home'>Home</a><a href='/about'>About</a></nav>",
       "hint": "Think about where navigation links are typically placed in an HTML document."
     },
     {
-      "id": 40,
+      "id": "40",
       "question": "How do you create a comment in HTML?",
       "answer": "<!-- This is a comment -->",
       "example": "",
@@ -265,140 +265,140 @@
   ],
   "CSS": [
     {
-      "id": 41,
+      "id": "41",
       "question": "What does 'CSS' stand for?",
       "answer": "Cascading Style Sheets",
       "example": "Styling the presentation of a web page.",
       "hint": "Think about the purpose of CSS in styling the appearance of HTML elements."
     },
     {
-      "id": 42,
+      "id": "42",
       "question": "How do you apply an external CSS file to an HTML document?",
       "answer": "<link rel='stylesheet' type='text/css' href='styles.css'>",
       "example": "",
       "hint": "Consider the HTML tag used to link an external CSS file to an HTML document."
     },
     {
-      "id": 43,
+      "id": "43",
       "question": "What is the purpose of the `box-sizing` property in CSS?",
       "answer": "Defines how the size of an element is calculated, including padding and border.",
       "example": "box-sizing: border-box;",
       "hint": "Think about how `box-sizing` affects the total size of an element."
     },
     {
-      "id": 44,
+      "id": "44",
       "question": "How do you center an element horizontally in CSS?",
       "answer": "Using `margin: auto;` or `text-align: center;`.",
       "example": "div { margin: auto; }",
       "hint": "Consider the CSS properties and values used to center block-level and inline-level elements horizontally."
     },
     {
-      "id": 45,
+      "id": "45",
       "question": "What is the purpose of the `flexbox` layout in CSS?",
       "answer": "Provides a flexible and efficient way to layout items within a container.",
       "example": "display: flex; justify-content: space-between;",
       "hint": "Think about how `flexbox` simplifies the creation of complex layouts in CSS."
     },
     {
-      "id": 46,
+      "id": "46",
       "question": "How do you change the text color of an element in CSS?",
       "answer": "Using the `color` property.",
       "example": "p { color: blue; }",
       "hint": "Consider the CSS property used to set the color of text within an element."
     },
     {
-      "id": 47,
+      "id": "47",
       "question": "What is the purpose of the `z-index` property in CSS?",
       "answer": "Specifies the stack order of an element.",
       "example": "position: absolute; z-index: 1;",
       "hint": "Think about how `z-index` affects the positioning of elements in the stacking order."
     },
     {
-      "id": 48,
+      "id": "48",
       "question": "How do you apply a hover effect to an element in CSS?",
       "answer": "Using the `:hover` pseudo-class.",
       "example": "a:hover { color: red; }",
       "hint": "Consider the CSS pseudo-class used to apply styles when an element is hovered over."
     },
     {
-      "id": 49,
+      "id": "49",
       "question": "Explain the difference between `padding` and `margin` in CSS.",
       "answer": "`Padding` is the space inside the border, and `margin` is the space outside the border.",
       "example": "div { padding: 10px; margin: 10px; }",
       "hint": "Think about how `padding` and `margin` contribute to the spacing of elements."
     },
     {
-      "id": 50,
+      "id": "50",
       "question": "What is the purpose of the `media query` in CSS?",
       "answer": "Applies styles based on the characteristics of the device or viewport.",
       "example": "@media (max-width: 600px) { body { font-size: 14px; } }",
       "hint": "Consider how `media queries` are used for responsive web design."
     },
     {
-      "id": 51,
+      "id": "51",
       "question": "How do you hide an element in CSS?",
       "answer": "Using `display: none;` or `visibility: hidden;`.",
       "example": "div { display: none; }",
       "hint": "Consider the CSS properties used to hide elements with and without preserving space."
     },
     {
-      "id": 52,
+      "id": "52",
       "question": "What is the purpose of the `transition` property in CSS?",
       "answer": "Adds a smooth transition effect to changes in property values.",
       "example": "transition: width 2s;",
       "hint": "Think about how `transition` enhances the visual experience by animating property changes."
     },
     {
-      "id": 53,
+      "id": "53",
       "question": "How do you select all paragraphs with a class of 'intro' in CSS?",
       "answer": "`.intro` or `p.intro`.",
       "example": ".intro { font-weight: bold; }",
       "hint": "Consider the CSS selectors used to target elements with specific classes."
     },
     {
-      "id": 54,
+      "id": "54",
       "question": "What is the purpose of the `position` property in CSS?",
       "answer": "Specifies the positioning method used for an element.",
       "example": "position: relative;",
       "hint": "Think about how `position` determines the positioning of an element within its containing element."
     },
     {
-      "id": 55,
+      "id": "55",
       "question": "How do you apply a gradient background to an element in CSS?",
       "answer": "Using the `linear-gradient` or `radial-gradient` property.",
       "example": "background: linear-gradient(to right, red, yellow);",
       "hint": "Consider the CSS properties used to create gradient backgrounds."
     },
     {
-      "id": 56,
+      "id": "56",
       "question": "What is the purpose of the `clearfix` hack in CSS?",
       "answer": "Clears the floated elements within a container.",
       "example": ".clearfix::after { content: ''; display: table; clear: both; }",
       "hint": "Think about how the `clearfix` hack resolves issues with floated elements and container height."
     },
     {
-      "id": 57,
+      "id": "57",
       "question": "How do you select the first child of an element in CSS?",
       "answer": ":first-child",
       "example": "p:first-child { font-weight: bold; }",
       "hint": "Consider the CSS pseudo-class used to select the first child of a parent element."
     },
     {
-      "id": 58,
+      "id": "58",
       "question": "What is the purpose of the `font-family` property in CSS?",
       "answer": "Defines the preferred font for an element.",
       "example": "body { font-family: 'Arial', sans-serif; }",
       "hint": "Think about how `font-family` is used to specify the typeface or font family for text."
     },
     {
-      "id": 59,
+      "id": "59",
       "question": "How do you apply a shadow to text in CSS?",
       "answer": "Using the `text-shadow` property.",
       "example": "h1 { text-shadow: 2px 2px 4px #000000; }",
       "hint": "Consider the CSS property used to add a shadow effect to text."
     },
     {
-      "id": 60,
+      "id": "60",
       "question": "Explain the purpose of the `box-shadow` property in CSS.",
       "answer": "Adds a shadow effect to an element, including its border and background.",
       "example": "box-shadow: 4px 4px 8px #999999;",
