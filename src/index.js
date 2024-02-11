@@ -72,15 +72,15 @@ selectCategory()
 //! Looping
 
 const triggerNextBtn = () => {
-    debugger
+    
     getJSON(`${url}${sideBar.className}`).then((flashcardObj) => { 
-        debugger
+        
     if (i < flashcardObj.length){
         displayFlashcard(flashcardObj[i]);
         i++
-        debugger
+        
     } else {
-        debugger
+        
         nextCardBtn.innerText = ('CLICK START TO PLAY AGAIN!') //* make conditional to STOP after obj.length
     
 }   
@@ -124,7 +124,7 @@ const displayFlashcard = (flashcardObj) => {
     answerButton.addEventListener('click', () => {
         answerButton.innerText = flashcardObj.answer
     })
-debugger
+
     //! Cycle through all data with click of next button
     nextBtn.addEventListener('click', triggerNextBtn)
 
@@ -133,17 +133,17 @@ debugger
     flashcardQuestion.innerText = flashcardObj.question
     flashcardExample.innerText = flashcardObj.example
     flashcardAnswer.innerText = flashcardObj.answer
-    debugger
+    
 
     flashcard.append(flashcardQuestion, exampleButton, answerButton, nextBtn)
-    debugger
+    
 
 }
 
 //! Triggers next button and shows next object in database
 
 
-debugger
+
 //! Triggers Start button
 // const handleStart = () => {
 //     startBtn.addEventListener('click', (e) => {
