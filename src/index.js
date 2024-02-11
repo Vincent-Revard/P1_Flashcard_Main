@@ -1,5 +1,6 @@
 // Global Variables
 const url = 'http://localhost:3000/flashCards'
+const javaScriptURL = 'http://localhost:3000/flashCards/JavaScript'
 const flashcard = document.querySelector('#flashcard')
 const allCards = document.querySelector('#allcards')
 const newFlashcard = document.querySelector('#new-flashcard')
@@ -13,8 +14,11 @@ const triggerNextBtn = (flashcardObj) => {
     if (i < flashcardObj.length){
         displayFlashcard(flashcardObj[i]);
         i++
+    } else {(i >= flashcardObj.length)
+        nextCardBtn.innerText = ('CLICK START TO PLAY AGAIN!')
     }
 }
+
 //* make conditional to STOP after obj.length
 
 //Add Codes
