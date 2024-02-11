@@ -89,6 +89,29 @@ const handleStart = () => {
     })
 }
 
+//* Creating the create new flashcard form
+
+
+const addNewFlashcardJavascript = (e) => {
+    e.preventDefault()
+    debugger
+    const addedNewFlashcard = {
+        question: e.target.elements['new-question'].value,
+        answer: e.target.elements['new-answer'].value,
+        example: e.target.elements['new-example'].value
+
+    }
+    debugger
+    postJSON(url, addedNewFlashcard)
+        .then((createdFlashCard) => handleStart())
+        .catch(console.error)
+    debugger
+    e.target.reset()
+}
+
+newFlashcard.addEventListener('submit', addNewFlashcardJavascript)
+
+
 //Index Helper
 
 const getJSON = (url) => {
@@ -100,6 +123,24 @@ const getJSON = (url) => {
             throw resp.statusText
         }
     })
+}
+
+const postJSON = (url, data) => {
+    const configObj = {
+        method: 'POST',
+        headers: {
+                'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }
+    return fetch(url, configObj)
+        .then((resp) => {
+            if (resp.ok) {
+                return resp.json()
+            } else {
+                throw resp.statusText
+            }
+        })
 }
 
 handleStart()
