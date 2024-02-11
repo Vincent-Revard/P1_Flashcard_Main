@@ -4,18 +4,15 @@ const javascriptURL = 'http://localhost:3000/JavaScript'
 const htmlURL = 'http://localhost:3000/HTML'
 const cssURL = 'http://localhost:3000/CSS'
 const flashcard = document.querySelector('#flashcard')
-const allCards = document.querySelector('#allcards')
 const newFlashcard = document.querySelector('#new-flashcard')
 const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
-const startBtn = document.querySelector('#startbtn')
 const sideBar = document.querySelector("#sidebar")
 const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 
 
 //Add Codes
-
 
 
 const selectCategory = () => {
@@ -57,8 +54,8 @@ css.addEventListener('click', () => {
     getJSON(`${url}${currentCategory}`)
     .then((flashcardsData => displayFlashcard(flashcardsData[0])
     .catch(console.log)
-))
-}
+        ))
+    }
 )
 categories.append(javaScript, html, css)
 }
@@ -79,7 +76,7 @@ const triggerNextBtn = () => {
         
     } else {
         
-        nextCardBtn.innerText = ('CLICK START TO PLAY AGAIN!') //* make conditional to STOP after obj.length
+        nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
     
 }   
 })
@@ -95,9 +92,11 @@ const triggerNextBtn = () => {
 const displayFlashcard = (flashcardObj) => {
     //! Empties out the webpage
     flashcard.innerHTML = ''
+    const startText = document.querySelector('#start-text')
+    startText.innerHTML = ''
     flashcard.setAttribute('data-id', flashcardObj.id)
     //! Creating elements to our flashcard
-    const flashcardQuestion = document.createElement('p')
+    const flashcardQuestion = document.createElement('h3')
     const flashcardExample = document.createElement('p')
     const flashcardAnswer = document.createElement('p')
     const exampleButton = document.createElement('button')
@@ -207,6 +206,3 @@ const postJSON = (url, data) => {
 }
 
 // handleStart()
-
-
-
