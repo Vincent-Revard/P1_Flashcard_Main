@@ -94,18 +94,16 @@ const handleStart = () => {
 
 const addNewFlashcardJavascript = (e) => {
     e.preventDefault()
-    debugger
+    
     const addedNewFlashcard = {
         question: e.target.elements['new-question'].value,
         answer: e.target.elements['new-answer'].value,
         example: e.target.elements['new-example'].value
-
     }
-    debugger
+    
     postJSON(url, addedNewFlashcard)
         .then((createdFlashCard) => handleStart())
-        .catch(console.error)
-    debugger
+        .catch(console.error)   
     e.target.reset()
 }
 
