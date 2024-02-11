@@ -18,9 +18,9 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 const selectCategory = () => {
 
 const javaScript = document.createElement('p')
-javaScript.innerText = 'JavaScript'
+javaScript.innerText = selectableCategories[0]
 javaScript.addEventListener('click', () => {
-        let currentCategory = javaScript.innerText
+        let currentCategory = selectableCategories[0]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
         flashcard.innerHTML = ''
@@ -31,28 +31,28 @@ javaScript.addEventListener('click', () => {
 )
 
 const html = document.createElement('p')
-html.innerText = 'HTML'
+html.innerText = selectableCategories[1]
 html.addEventListener('click', () => {
-    let currentCategory = html.innerText
+    let currentCategory = selectableCategories[1]
     sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
     i = 0;
     flashcard.innerHTML = ''
     getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[0])
+    .then((flashcardsData => displayFlashcard(flashcardsData[1])
     .catch(console.log)
 ))
 }
 )
 
 const css = document.createElement('p')
-css.innerText = 'CSS'
+css.innerText = selectableCategories[2]
 css.addEventListener('click', () => {
-    let currentCategory = css.innerText
+    let currentCategory = selectableCategories[2]
     sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
     i = 0;
     flashcard.innerHTML = ''
     getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[0])
+    .then((flashcardsData => displayFlashcard(flashcardsData[2])
     .catch(console.log)
         ))
     }
