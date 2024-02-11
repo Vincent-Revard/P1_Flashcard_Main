@@ -105,9 +105,9 @@ const displayFlashcard = (flashcardObj) => {
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
     exampleButton.innerText = 'hint?'
-    const answerButton = document.createElement('button')
+    const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
-    answerButton.innerText = 'Click me for the answer'
+    answerButton.innerText = 'Press any key to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
 
@@ -119,7 +119,7 @@ const displayFlashcard = (flashcardObj) => {
         exampleButton.innerText = flashcardObj.example
     })
 
-    answerButton.addEventListener('click', () => {
+    document.addEventListener('keydown', () => {
         answerButton.innerText = flashcardObj.answer
     })
 
