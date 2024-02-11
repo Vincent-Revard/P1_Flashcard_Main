@@ -7,6 +7,15 @@ const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const startBtn = document.querySelector('#startbtn')
 
+// Category Variables
+const javaScript = document.createElement('p')
+const html = document.createElement('p')
+const css = document.createElement('p')
+javaScript.innerText = 'JavaScript'
+html.innerText = 'HTML'
+css.innerText = 'CSS'
+categories.append(javaScript, html, css)
+
 //! Looping
 let i = 0;
 const triggerNextBtn = (flashcardObj) => {
@@ -18,15 +27,6 @@ const triggerNextBtn = (flashcardObj) => {
 //* make conditional to STOP after obj.length
 
 //Add Codes
-
-const javaScript = document.createElement('p')
-javaScript.innerText = 'JavaScript'
-const html = document.createElement('p')
-html.innerText = 'HTML'
-const css = document.createElement('p')
-css.innerText = 'CSS'
-categories.append(javaScript, html, css)
-
 
 //! Displays ONE flashcard
 //* We still need to figure out NEXT data on NEXT button click
@@ -43,9 +43,9 @@ const displayFlashcard = (flashcardObj) => {
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
     exampleButton.innerText = 'hint?'
-    const answerButton = document.createElement('button')
+    const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
-    answerButton.innerText = 'Click me for the answer'
+    answerButton.innerText = 'Press any key to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
 
@@ -56,7 +56,7 @@ const displayFlashcard = (flashcardObj) => {
         exampleButton.innerText = flashcardObj.example
     })
 
-    answerButton.addEventListener('click', () => {
+    document.addEventListener('keydown', () => {
         answerButton.innerText = flashcardObj.answer
     })
 
