@@ -4,123 +4,144 @@
       "id": "1",
       "question": "What does 'DOM' stand for in JavaScript?",
       "answer": "Document Object Model",
-      "example": "Accessing and manipulating HTML elements using JavaScript."
+      "example": "Accessing and manipulating HTML elements using JavaScript.",
+      "hint": "Think about how JavaScript interacts with the structure of a webpage."
     },
     {
       "id": "2",
       "question": "How do you declare a variable in JavaScript?",
       "answer": "Using 'var', 'let', or 'const' keyword.",
-      "example": "let myVariable = 10;"
+      "example": "let myVariable = 10;",
+      "hint": "There are multiple ways to declare variables in JavaScript. What are they?"
     },
     {
       "id": "3",
       "question": "What is the purpose of 'console.log()'?",
       "answer": "Output information to the console for debugging.",
-      "example": "console.log('Hello, World!');"
+      "example": "console.log('Hello, World!');",
+      "hint": "This function is commonly used for debugging. What does it do?"
     },
     {
       "id": "4",
       "question": "What is an array in JavaScript?",
       "answer": "A data structure that stores a collection of elements.",
-      "example": "let colors = ['red', 'green', 'blue'];"
+      "example": "let colors = ['red', 'green', 'blue'];",
+      "hint": "Think about a way to store multiple values in a single variable."
     },
     {
       "id": "5",
       "question": "Explain the difference between '==' and '===' in JavaScript.",
       "answer": "'==' checks for equality, while '===' checks for both value and type equality.",
-      "example": "5 == '5' is true, but 5 === '5' is false."
+      "example": "5 == '5' is true, but 5 === '5' is false.",
+      "hint": "What is the difference between loose and strict equality?"
     },
     {
       "id": "6",
       "question": "What is the purpose of the 'function' keyword in JavaScript?",
       "answer": "Declares a function in JavaScript.",
-      "example": "function addNumbers(a, b) { return a + b; }"
+      "example": "function addNumbers(a, b) { return a + b; }",
+      "hint": "How do you define reusable blocks of code in JavaScript?"
     },
     {
       "id": "7",
       "question": "How do you comment in JavaScript?",
       "answer": "Using '//' for single-line comments and '/* */' for multi-line comments.",
-      "example": "// This is a single-line comment\n/* This is a\n   multi-line comment */"
+      "example": "// This is a single-line comment\n/* This is a\n   multi-line comment */",
+      "hint": "What syntax is used to add comments to your code in JavaScript?"
     },
     {
       "id": "8",
       "question": "What is an arrow function in JavaScript?",
       "answer": "A concise way to write function expressions.",
-      "example": "const add = (a, b) => a + b;"
+      "example": "const add = (a, b) => a + b;",
+      "hint": "How can you write a shorter syntax for a function in JavaScript?"
     },
     {
       "id": "9",
       "question": "Explain the purpose of the 'this' keyword in JavaScript.",
       "answer": "Refers to the current object.",
-      "example": "const person = { name: 'John', greet: function() { console.log('Hello, ' + this.name + '!'); } };"
+      "example": "const person = { name: 'John', greet: function() { console.log('Hello, ' + this.name + '!'); } };",
+      "hint": "What does 'this' refer to in the context of an object method?"
     },
     {
       "id": "10",
       "question": "How do you iterate over an array in JavaScript?",
       "answer": "Using loops like 'for' or array methods like 'forEach'.",
-      "example": "const numbers = [1, 2, 3]; for (let i = 0; < numbers.length; i++) { console.log(numbers[i]); }"
+      "example": "const numbers = [1, 2, 3]; for (let i = 0; < numbers.length; i++) { console.log(numbers[i]); }",
+      "hint": "What are some ways to go through each element of an array in JavaScript?"
     },
     {
       "id": "11",
       "question": "What is the purpose of the 'let' keyword in JavaScript?",
       "answer": "Declares a block-scoped variable.",
-      "example": "let x = 5;"
+      "example": "let x = 5;",
+      "hint": "How does 'let' differ from 'var' in terms of scope?"
     },
     {
       "id": "12",
       "question": "How do you add a class to an HTML element using JavaScript?",
       "answer": "Using the 'classList' property and the 'add' method.",
-      "example": "document.getElementById('myElement').classList.add('newClass');"
+      "example": "document.getElementById('myElement').classList.add('newClass');",
+      "hint": "What property and method can you use to manipulate the classes of an HTML element?"
     },
     {
       "id": "13",
       "question": "What is the purpose of 'async/await' keywords in JavaScript?",
       "answer": "Used to work with promises in a more synchronous way.",
-      "example": "async function fetchData() { const response = await fetch('https://api.example.com/data'); const data = await response.json(); console.log(data); }"
+      "example": "async function fetchData() { const response = await fetch('https://api.example.com/data'); const data = await response.json(); console.log(data); }",
+      "hint": "How can you make asynchronous code look and behave more like synchronous code?"
     },
     {
       "id": "14",
       "question": "Explain the concept of event delegation in JavaScript.",
       "answer": "Handling events on parent elements rather than individual child elements.",
-      "example": "<ul id='myList'><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>"
+      "example": "<ul id='myList'><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
+      "hint": "How can you optimize event handling for dynamically added elements?"
     },
     {
       "id": "15",
       "question": "What is the purpose of 'localStorage' in JavaScript?",
       "answer": "Provides a way to store key/value pairs in the browser.",
-      "example": "localStorage.setItem('user', 'John'); const storedUser = localStorage.getItem('user');"
+      "example": "localStorage.setItem('user', 'John'); const storedUser = localStorage.getItem('user');",
+      "hint": "How can you store persistent data on the client side in a web browser?"
     },
     {
       "id": "16",
       "question": "How do you handle errors in JavaScript?",
       "answer": "Using 'try', 'catch', and 'finally' blocks.",
-      "example": "try { /* Code that might throw an error */ } catch (error) { /* Handle the error */ } finally { /* Code that will always run */ }"
+      "example": "try { /* Code that might throw an error */ } catch (error) { /* Handle the error */ } finally { /* Code that will always run */ }",
+      "hint": "What constructs allow you to gracefully handle errors in your code?"
     },
     {
       "id": "17",
       "question": "What is the purpose of the 'fetch' API in JavaScript?",
       "answer": "Allows making HTTP requests in a more modern and flexible way.",
-      "example": "fetch('https://api.example.com/data').then(response => response.json()).then(data => console.log(data)).catch(error => console.error('Error:', error));"
+      "example": "fetch('https://api.example.com/data').then(response => response.json()).then(data => console.log(data)).catch(error => console.error('Error:', error));",
+      "hint": "How can you make asynchronous HTTP requests in a more convenient manner?"
     },
     {
       "id": "18",
       "question": "How do you create a timer in JavaScript?",
       "answer": "Using 'setTimeout' or 'setInterval' functions.",
-      "example": "setTimeout(() => { console.log('Delayed message'); }, 2000);"
+      "example": "setTimeout(() => { console.log('Delayed message'); }, 2000);",
+      "hint": "What functions can you use to execute code after a specified delay or at intervals?"
     },
     {
       "id": "19",
       "question": "What is the purpose of the 'map' function in JavaScript?",
       "answer": "Creates a new array by applying a function to each element of an existing array.",
-      "example": "const numbers = [1, 2, 3]; const doubled = numbers.map(num => num * 2);"
+      "example": "const numbers = [1, 2, 3]; const doubled = numbers.map(num => num * 2);",
+      "hint": "How can you transform each element of an array into a new array based on a provided function?"
     },
     {
       "id": "20",
       "question": "Explain the concept of closures in JavaScript.",
       "answer": "Functions that have access to variables from their outer scope.",
-      "example": "function outerFunction() { const outerVariable = 'I am from the outer function'; function innerFunction() { console.log(outerVariable); } return innerFunction; }"
+      "example": "function outerFunction() { const outerVariable = 'I am from the outer function'; function innerFunction() { console.log(outerVariable); } return innerFunction; }",
+      "hint": "What allows a function to retain access to variables from the scope in which it was created?"
     }
-  ],
+  ]
+  ,
   "HTML": [
     {
       "id": "21",
