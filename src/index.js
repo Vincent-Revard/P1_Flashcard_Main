@@ -94,18 +94,20 @@ const displayFlashcard = (flashcardObj) => {
     flashcard.innerHTML = ''
     const startText = document.querySelector('#start-text')
     startText.innerHTML = ''
-    flashcard.setAttribute('data-id', flashcardObj.id)
     //! Creating elements to our flashcard
     const flashcardQuestion = document.createElement('h3')
-    const flashcardHint = document.createElement('p')
     const flashcardExample = document.createElement('p')
     const flashcardAnswer = document.createElement('p')
+    const flashcardHint = document.createElement('p')
     const exampleButton = document.createElement('button')
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
-    exampleButton.innerText = 'Need a example? Click here!'
-    flashcardHint.innerText = 'Need a hint? Click here!'
+    exampleButton.innerText = 'Need a example? Click here!'   
+    debugger
+    const hintButton = document.createElement('button')
+    hintButton.innerText = 'Need a hint? Click here!'
+    hintButton.setAttribute('data-id', flashcardObj.id)
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
     answerButton.innerText = 'Press any key to reveal answer'
@@ -120,8 +122,8 @@ const displayFlashcard = (flashcardObj) => {
         exampleButton.innerText = flashcardObj.example
     })
 
-    flashcardHint.addEventListener('click', () => {
-        flashcardHint.innerText = flashcardObj.hint
+    hintButton.addEventListener('click', () => {
+        hintButton.innerText = flashcardObj.hint
     })
 
     document.addEventListener('keydown', () => {
@@ -139,7 +141,7 @@ const displayFlashcard = (flashcardObj) => {
     flashcardAnswer.innerText = flashcardObj.answer
     
 
-    flashcard.append(flashcardQuestion, flashcardHint, exampleButton, answerButton, nextBtn)
+    flashcard.append(flashcardQuestion, hintButton, exampleButton, answerButton, nextBtn)
     
 
 }
@@ -174,7 +176,10 @@ const addNewFlashcardJavascript = (e) => {
     }
     
     postJSON(`${url}${sideBar.className}`, addedNewFlashcard)
-        .then((createdFlashCard) => triggerNextBtn())
+        .then((createdFlashCard) => {
+            displayFlashcard(createdFlashCard)
+        })
+        .then(triggerNextBtn())
         .catch(console.error)   
     e.target.reset()
 }
