@@ -38,7 +38,7 @@ html.addEventListener('click', () => {
     i = 0;
     flashcard.innerHTML = ''
     getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[1])
+    .then((flashcardsData => displayFlashcard(flashcardsData[0])
     .catch(console.log)
 ))
 }
@@ -52,7 +52,7 @@ css.addEventListener('click', () => {
     i = 0;
     flashcard.innerHTML = ''
     getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[2])
+    .then((flashcardsData => displayFlashcard(flashcardsData[0])
     .catch(console.log)
         ))
     }
@@ -69,26 +69,26 @@ selectCategory()
 const triggerNextBtn = () => {
     
     getJSON(`${url}${sideBar.className}`).then((flashcardObj) => { 
-        
-    if (i < flashcardObj.length){
-        displayFlashcard(flashcardObj[i]);
+        slicedFlashCardObj = flashcardObj.slice(1) // uses .slice(1) on the object to pull the first card out on next click
+    if (i < slicedFlashCardObj.length){
+        displayFlashcard(slicedFlashCardObj[i]); 
         i++
-        
     } else {
-        
-        nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
-    
-}   
+        flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'   
+        //! Do we want the above or the below to happen? 
+        // displayFlashcard(flashcardObj[0])
+        // nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
+}
 })
     .catch(console.log)
+flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'   
 }
 
 
 
 
 //! Displays ONE flashcard
-//* We still need to figure out NEXT data on NEXT button click
-//* Hide start button after start button activated
+
 const displayFlashcard = (flashcardObj) => {
     //! Empties out the webpage
     flashcard.innerHTML = ''
@@ -97,13 +97,15 @@ const displayFlashcard = (flashcardObj) => {
     flashcard.setAttribute('data-id', flashcardObj.id)
     //! Creating elements to our flashcard
     const flashcardQuestion = document.createElement('h3')
+    const flashcardHint = document.createElement('p')
     const flashcardExample = document.createElement('p')
     const flashcardAnswer = document.createElement('p')
     const exampleButton = document.createElement('button')
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
-    exampleButton.innerText = 'hint?'
+    exampleButton.innerText = 'Need a example? Click here!'
+    flashcardHint.innerText = 'Need a hint? Click here!'
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
     answerButton.innerText = 'Press any key to reveal answer'
@@ -118,6 +120,10 @@ const displayFlashcard = (flashcardObj) => {
         exampleButton.innerText = flashcardObj.example
     })
 
+    flashcardHint.addEventListener('click', () => {
+        flashcardHint.innerText = flashcardObj.hint
+    })
+
     document.addEventListener('keydown', () => {
         answerButton.innerText = flashcardObj.answer
     })
@@ -128,11 +134,12 @@ const displayFlashcard = (flashcardObj) => {
     nextBtn.innerText = 'NEXT CARD'
     
     flashcardQuestion.innerText = flashcardObj.question
+    flashcardHint.innerText = flashcardObj.hint
     flashcardExample.innerText = flashcardObj.example
     flashcardAnswer.innerText = flashcardObj.answer
     
 
-    flashcard.append(flashcardQuestion, exampleButton, answerButton, nextBtn)
+    flashcard.append(flashcardQuestion, flashcardHint, exampleButton, answerButton, nextBtn)
     
 
 }
@@ -161,6 +168,7 @@ const addNewFlashcardJavascript = (e) => {
     
     const addedNewFlashcard = {
         question: e.target.elements['new-question'].value,
+        question: e.target.elements['new-hint'].value,
         answer: e.target.elements['new-answer'].value,
         example: e.target.elements['new-example'].value
     }
