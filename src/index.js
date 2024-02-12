@@ -14,74 +14,69 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 //Add Codes
 
-
-const selectCategory = () => {
-
-const javaScript = document.createElement('p')
-javaScript.innerText = selectableCategories[0]
-javaScript.addEventListener('click', () => {
+    const javaScript = document.createElement('p')
+    javaScript.innerText = selectableCategories[0]
+    javaScript.addEventListener('click', () => {
         let currentCategory = selectableCategories[0]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
-        flashcard.innerHTML = ''
         getJSON(`${url}${currentCategory}`)
-        .then((flashcardsData => displayFlashcard(flashcardsData[0])))
-        .catch(console.log)
-}
-)
-
-const html = document.createElement('p')
-html.innerText = selectableCategories[1]
-html.addEventListener('click', () => {
-    let currentCategory = selectableCategories[1]
-    sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
-    i = 0;
-    flashcard.innerHTML = ''
-    getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[0])
-    .catch(console.log)
-))
-}
-)
-
-const css = document.createElement('p')
-css.innerText = selectableCategories[2]
-css.addEventListener('click', () => {
-    let currentCategory = selectableCategories[2]
-    sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
-    i = 0;
-    flashcard.innerHTML = ''
-    getJSON(`${url}${currentCategory}`)
-    .then((flashcardsData => displayFlashcard(flashcardsData[0])
-    .catch(console.log)
+            .then((flashcardsData => displayFlashcard(flashcardsData[0])
+            .catch(console.log)
         ))
     }
 )
+
+    
+
+    const html = document.createElement('p')
+    html.innerText = selectableCategories[1]
+    html.addEventListener('click', () => {
+        let currentCategory = selectableCategories[1]
+        sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
+        i = 0;
+        getJSON(`${url}${currentCategory}`)
+            .then((flashcardsData => displayFlashcard(flashcardsData[0])
+                .catch(console.log)
+            ))
+    }
+)
+
+    const css = document.createElement('p')
+    css.innerText = selectableCategories[2]
+    css.addEventListener('click', () => {
+        let currentCategory = selectableCategories[2]
+        sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
+        i = 0;
+        getJSON(`${url}${currentCategory}`)
+            .then((flashcardsData => displayFlashcard(flashcardsData[0])
+            .then(triggerNextBtn())
+                .catch(console.log)
+            ))
+    }
+)
 categories.append(javaScript, html, css)
-}
 
 
-selectCategory()
 
 
 //! Looping
 
 const triggerNextBtn = () => {
-    
-    getJSON(`${url}${sideBar.className}`).then((flashcardObj) => { 
+
+    getJSON(`${url}${sideBar.className}`).then((flashcardObj) => {
         slicedFlashCardObj = flashcardObj.slice(1) // uses .slice(1) on the object to pull the first card out on next click
-    if (i < slicedFlashCardObj.length){
-        displayFlashcard(slicedFlashCardObj[i]); 
-        i++
-    } else {
-        flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'   
-        //! Do we want the above or the below to happen? 
-        // displayFlashcard(flashcardObj[0])
-        // nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
-}
-})
-    .catch(console.log)
-flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'   
+        if (i < slicedFlashCardObj.length) {
+            displayFlashcard(slicedFlashCardObj[i]);
+            i++
+        } else {
+            flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
+            //! Do we want the above or the below to happen? 
+            // displayFlashcard(flashcardObj[0])
+            // nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
+        }
+    })
+        .catch(console.log)
 }
 
 
@@ -103,7 +98,7 @@ const displayFlashcard = (flashcardObj) => {
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
-    exampleButton.innerText = 'Need a example? Click here!'   
+    exampleButton.innerText = 'Need a example? Click here!'
     debugger
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
@@ -134,15 +129,15 @@ const displayFlashcard = (flashcardObj) => {
     nextBtn.addEventListener('click', triggerNextBtn)
 
     nextBtn.innerText = 'NEXT CARD'
-    
-    flashcardQuestion.innerText = flashcardObj.question
-    flashcardHint.innerText = flashcardObj.hint
-    flashcardExample.innerText = flashcardObj.example
-    flashcardAnswer.innerText = flashcardObj.answer
-    
 
-    flashcard.append(flashcardQuestion, hintButton, exampleButton, answerButton, nextBtn)
-    
+    flashcardQuestion.innerText = flashcardObj.question
+    // flashcardHint.innerText = flashcardObj.hint
+    // flashcardExample.innerText = flashcardObj.example
+    // flashcardAnswer.innerText = flashcardObj.answer
+
+
+    flashcard.append(flashcardQuestion, hintButton, answerButton, exampleButton, nextBtn)
+
 
 }
 
@@ -167,20 +162,18 @@ const displayFlashcard = (flashcardObj) => {
 
 const addNewFlashcardJavascript = (e) => {
     e.preventDefault()
-    
+
     const addedNewFlashcard = {
         question: e.target.elements['new-question'].value,
-        question: e.target.elements['new-hint'].value,
+        hint: e.target.elements['new-hint'].value,
         answer: e.target.elements['new-answer'].value,
         example: e.target.elements['new-example'].value
     }
-    
+
     postJSON(`${url}${sideBar.className}`, addedNewFlashcard)
         .then((createdFlashCard) => {
             displayFlashcard(createdFlashCard)
         })
-        .then(triggerNextBtn())
-        .catch(console.error)   
     e.target.reset()
 }
 
@@ -191,20 +184,20 @@ newFlashcard.addEventListener('submit', addNewFlashcardJavascript)
 
 const getJSON = (url) => {
     return fetch(`${url}`)
-    .then((resp) => {
-        if(resp.ok){
-            return resp.json()
-        } else{
-            throw resp.statusText
-        }
-    })
+        .then((resp) => {
+            if (resp.ok) {
+                return resp.json()
+            } else {
+                throw resp.statusText
+            }
+        })
 }
 
 const postJSON = (url, data) => {
     const configObj = {
         method: 'POST',
         headers: {
-                'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
     }

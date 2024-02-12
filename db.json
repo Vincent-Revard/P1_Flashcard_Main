@@ -140,8 +140,7 @@
       "example": "function outerFunction() { const outerVariable = 'I am from the outer function'; function innerFunction() { console.log(outerVariable); } return innerFunction; }",
       "hint": "What allows a function to retain access to variables from the scope in which it was created?"
     }
-  ]
-  ,
+  ],
   "HTML": [
     {
       "id": "21",
@@ -154,7 +153,7 @@
       "id": "22",
       "question": "How do you create a hyperlink in HTML?",
       "answer": "<a href='https://example.com'>Link Text</a>",
-      "example": "",
+      "example": "don't forget to defer!",
       "hint": "Consider the HTML tag used to create links and the required attributes."
     },
     {
@@ -168,7 +167,7 @@
       "id": "24",
       "question": "How do you add an image to an HTML document?",
       "answer": "<img src='image.jpg' alt='Description'>",
-      "example": "",
+      "example": "Naming the <alt> the name of the image is a good practice",
       "hint": "Consider the HTML tag used to embed images and its required attributes."
     },
     {
@@ -182,7 +181,7 @@
       "id": "26",
       "question": "How do you create an ordered list in HTML?",
       "answer": "<ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-      "example": "",
+      "example": "ol is what makes your li ordered!",
       "hint": "Consider the HTML tag used to create ordered lists and its structure."
     },
     {
@@ -196,7 +195,7 @@
       "id": "28",
       "question": "How do you create a form in HTML?",
       "answer": "<form action='/submit' method='post'><label for='username'>Username:</label><input type='text' id='username' name='username'><input type='submit' value='Submit'></form>",
-      "example": "",
+      "example": "don't forget to use e.target.[identifier].value to pull data from a form",
       "hint": "Consider the HTML tags used to create forms and their attributes for defining form behavior."
     },
     {
@@ -217,7 +216,7 @@
       "id": "31",
       "question": "How do you create a table in HTML?",
       "answer": "<table><tr><th>Header 1</th><th>Header 2</th></tr><tr><td>Data 1</td><td>Data 2</td></tr></table>",
-      "example": "",
+      "example": "creating ID's can be good for click events",
       "hint": "Think about the HTML tags used to create tables, rows, and cells."
     },
     {
@@ -259,7 +258,7 @@
       "id": "37",
       "question": "How do you create a dropdown list in HTML?",
       "answer": "<select><option value='option1'>Option 1</option><option value='option2'>Option 2</option></select>",
-      "example": "",
+      "example": "don't forget to name your options for easier selection",
       "hint": "Think about the HTML tags used to create dropdown lists and their structure."
     },
     {
@@ -280,7 +279,7 @@
       "id": "40",
       "question": "How do you create a comment in HTML?",
       "answer": "<!-- This is a comment -->",
-      "example": "",
+      "example": "<!-- This will be anything you type -->",
       "hint": "Think about the syntax for creating comments in HTML."
     }
   ],
@@ -296,7 +295,7 @@
       "id": "42",
       "question": "How do you apply an external CSS file to an HTML document?",
       "answer": "<link rel='stylesheet' type='text/css' href='styles.css'>",
-      "example": "",
+      "example": "don't forget you might need ./ instead of just / if your src is in a different folder",
       "hint": "Consider the HTML tag used to link an external CSS file to an HTML document."
     },
     {
