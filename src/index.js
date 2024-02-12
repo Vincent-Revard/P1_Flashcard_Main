@@ -8,26 +8,32 @@ const newFlashcard = document.querySelector('#new-flashcard')
 const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const sideBar = document.querySelector("#sidebar")
+const allCards = document.querySelector('#all-cards')
+const listOfCardsInUl = document.querySelector('#list-of-cards')
 const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 
 
 //Add Codes
 
+//! Invoking by pressing on categories to start the application
     const javaScript = document.createElement('p')
     javaScript.innerText = selectableCategories[0]
     javaScript.addEventListener('click', () => {
         let currentCategory = selectableCategories[0]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
+        listOfCardsInUl.innerHTML = ''
+        listOfCardsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
-            .then((flashcardsData => displayFlashcard(flashcardsData[0])
-            .catch(console.log)
+        .then((flashcardsData => {
+            displayFlashcard(flashcardsData[0])
+            flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
+            }
         ))
-    }
+        .catch(console.log)
+}
 )
-
-    
 
     const html = document.createElement('p')
     html.innerText = selectableCategories[1]
@@ -35,11 +41,16 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
         let currentCategory = selectableCategories[1]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
         i = 0;
+        listOfCardsInUl.innerHTML = ''
+        listOfCardsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
-            .then((flashcardsData => displayFlashcard(flashcardsData[0])
-                .catch(console.log)
-            ))
-    }
+        .then((flashcardsData => {
+            displayFlashcard(flashcardsData[0])
+            flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData))
+            }
+        ))
+        .catch(console.log)
+}
 )
 
     const css = document.createElement('p')
@@ -48,19 +59,36 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
         let currentCategory = selectableCategories[2]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
         i = 0;
+        listOfCardsInUl.innerHTML = ''
+        listOfCardsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
-            .then((flashcardsData => displayFlashcard(flashcardsData[0])
-            .then(triggerNextBtn())
-                .catch(console.log)
+            .then((flashcardsData => {
+                displayFlashcard(flashcardsData[0])
+                flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
+                }
             ))
+            .catch(console.log)
     }
 )
+
 categories.append(javaScript, html, css)
 
 
+//! Displays all questions using forEach() for clicked category
+const displayAllQuestions = (flashcardObj) => {
+    const li = document.createElement('li')
+    li.className = 'card-list'
+    li.setAttribute('data-id', flashcardObj.id)
+    
+    const h5 = document.createElement('h5')
+    h5.innerText = flashcardObj.question
+    
+    listOfCardsInUl.append(li)
+    li.append(h5)
+}
 
 
-//! Looping
+//! Looping & callback 
 
 const triggerNextBtn = () => {
 
@@ -71,9 +99,6 @@ const triggerNextBtn = () => {
             i++
         } else {
             flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
-            //! Do we want the above or the below to happen? 
-            // displayFlashcard(flashcardObj[0])
-            // nextCardBtn.innerText = ('CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!') //* make conditional to STOP after obj.length
         }
     })
         .catch(console.log)
@@ -89,17 +114,14 @@ const displayFlashcard = (flashcardObj) => {
     flashcard.innerHTML = ''
     const startText = document.querySelector('#start-text')
     startText.innerHTML = ''
+
     //! Creating elements to our flashcard
     const flashcardQuestion = document.createElement('h3')
-    const flashcardExample = document.createElement('p')
-    const flashcardAnswer = document.createElement('p')
-    const flashcardHint = document.createElement('p')
     const exampleButton = document.createElement('button')
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
     exampleButton.innerText = 'Need a example? Click here!'
-    debugger
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
     hintButton.setAttribute('data-id', flashcardObj.id)
@@ -109,10 +131,12 @@ const displayFlashcard = (flashcardObj) => {
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
 
-    const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
-    const selectSecondbtnA = document.querySelector(`div#flashcard > .p > button > button[data-id='${flashcardObj.id}']`)
-    const selectCurrentFlashcardSet = document.querySelector(`div#flashcard[data-id='${flashcardObj.id}']`)
+    //! Will be used for delete button in the future. Not for the current project
+    // const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
+    // const selectSecondbtnA = document.querySelector(`div#flashcard > .p > button > button[data-id='${flashcardObj.id}']`)
+    // const selectCurrentFlashcardSet = document.querySelector(`div#flashcard[data-id='${flashcardObj.id}']`)
 
+    //! EventListeners
     exampleButton.addEventListener('click', () => {
         exampleButton.innerText = flashcardObj.example
     })
@@ -127,39 +151,18 @@ const displayFlashcard = (flashcardObj) => {
 
     //! Cycle through all data with click of next button
     nextBtn.addEventListener('click', triggerNextBtn)
-
     nextBtn.innerText = 'NEXT CARD'
 
+    //! Appends information to webpage (flashcard)
     flashcardQuestion.innerText = flashcardObj.question
-    // flashcardHint.innerText = flashcardObj.hint
-    // flashcardExample.innerText = flashcardObj.example
-    // flashcardAnswer.innerText = flashcardObj.answer
-
-
     flashcard.append(flashcardQuestion, hintButton, answerButton, exampleButton, nextBtn)
 
 
 }
 
-//! Triggers next button and shows next object in database
 
 
-
-//! Triggers Start button
-// const handleStart = () => {
-//     startBtn.addEventListener('click', (e) => {
-//         i = 0;
-//         displayFlashcard(flashcardObj[0])
-//         getJSON(url)
-//         .then((flashcardsData => {
-//             displayFlashcard(flashcardsData[0])
-//         })) 
-//     })
-// }
-
-//* Creating the create new flashcard form
-
-
+//! Creating the create new flashcard form
 const addNewFlashcardJavascript = (e) => {
     e.preventDefault()
 
@@ -210,5 +213,3 @@ const postJSON = (url, data) => {
             }
         })
 }
-
-// handleStart()
