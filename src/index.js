@@ -15,6 +15,7 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 
 //Add Codes
+const displayAllSelectableCategories = () => {
 
 //! Invoking by pressing on categories to start the application
     const javaScript = document.createElement('p')
@@ -72,7 +73,7 @@ const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 )
 
 categories.append(javaScript, html, css)
-
+}
 
 //! Displays all questions using forEach() for clicked category
 const displayAllQuestions = (flashcardObj) => {
@@ -204,12 +205,25 @@ const postJSON = (url, data) => {
         },
         body: JSON.stringify(data),
     }
+    console.log('A')
     return fetch(url, configObj)
         .then((resp) => {
             if (resp.ok) {
+                console.log('B')
                 return resp.json()
             } else {
                 throw resp.statusText
             }
         })
 }
+
+displayAllSelectableCategories()
+
+const factorial = (number) => {
+    for(let i = number-1; i >=1; i--){
+        number = i*number
+    }
+    return number
+
+}
+console.log(factorial(5))
