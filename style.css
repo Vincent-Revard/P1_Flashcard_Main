@@ -6,10 +6,6 @@ body{
     background-color: white;
 }
 
-li{
-    cursor: pointer;
-}
-
 .buttonDiv{
     text-align: center;
 }
