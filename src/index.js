@@ -205,11 +205,9 @@ const postJSON = (url, data) => {
         },
         body: JSON.stringify(data),
     }
-    console.log('A')
     return fetch(url, configObj)
         .then((resp) => {
             if (resp.ok) {
-                console.log('B')
                 return resp.json()
             } else {
                 throw resp.statusText
@@ -218,12 +216,3 @@ const postJSON = (url, data) => {
 }
 
 displayAllSelectableCategories()
-
-const factorial = (number) => {
-    for(let i = number-1; i >=1; i--){
-        number = i*number
-    }
-    return number
-
-}
-console.log(factorial(5))
