@@ -138,18 +138,8 @@ const triggerNextBtn = () => {
         if (i < slicedFlashCardObj.length) {
             displayFlashcard(slicedFlashCardObj[i])
             i++
-        } 
-        // else if(i >= slicedFlashCardObj.length - 1){
-        //     displayFlashcard(slicedFlashCardObj[i])
-        //     nextBtn.remove()
-        //     const finalBtn = createElement('button')
-        //     finalBtn.innerText = 'LAST CARD'
-        //     finalBtn.addEventListener('click', showConfetti())
-        //     flashcard.append(finalBtn)
-        // } 
-        else {
-            flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
-            showConfetti()
+        } else {
+            flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
         }
     })
         .catch(console.log)
@@ -172,18 +162,13 @@ const displayFlashcard = (flashcardObj) => {
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
-    exampleButton.setAttribute('id', 'exampleBtn')
-    exampleButton.setAttribute('class', 'flashcardBtn')
     exampleButton.innerText = 'Need a example? Click here!'
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
     hintButton.setAttribute('data-id', flashcardObj.id)
-    hintButton.setAttribute('id', 'hintBtn')
-    hintButton.setAttribute('class', 'flashcardBtn')
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
-    answerButton.setAttribute('id', 'answerBtn')
-    answerButton.innerText = 'Press ENTER to reveal answer'
+    answerButton.innerText = 'Press any key to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
     nextBtn.setAttribute('class', 'flashcardBtn')
