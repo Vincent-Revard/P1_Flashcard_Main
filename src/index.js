@@ -88,6 +88,24 @@ const displayAllQuestions = (flashcardObj) => {
     li.append(h5)
 }
 
+const showConfetti = () => {
+    const canvas = document.createElement('canvas')
+    canvas.setAttribute('id', 'confetti')
+    const confettiButton = document.createElement('button')
+    confettiButton.innerText = 'Celebrate your achievement!!'
+    confettiButton.setAttribute('id', 'confetti-button')
+    confettiButton.setAttribute('class', 'button-53')
+
+    const jsConfetti = new JSConfetti()
+
+    confettiButton.addEventListener('click', () => {
+        jsConfetti.addConfetti({
+            emojis: ['💯', '⚡️', '💥', '✨', '💫', '✅'],
+        }).then(() => jsConfetti.addConfetti())
+    })
+
+    flashcard.append(canvas, confettiButton)
+}
 
 //! Looping & callback 
 
@@ -96,10 +114,20 @@ const triggerNextBtn = () => {
     getJSON(`${url}${sideBar.className}`).then((flashcardObj) => {
         slicedFlashCardObj = flashcardObj.slice(1) // uses .slice(1) on the object to pull the first card out on next click
         if (i < slicedFlashCardObj.length) {
-            displayFlashcard(slicedFlashCardObj[i]);
+            displayFlashcard(slicedFlashCardObj[i])
             i++
-        } else {
+        } 
+        // else if(i >= slicedFlashCardObj.length - 1){
+        //     displayFlashcard(slicedFlashCardObj[i])
+        //     nextBtn.remove()
+        //     const finalBtn = createElement('button')
+        //     finalBtn.innerText = 'LAST CARD'
+        //     finalBtn.addEventListener('click', showConfetti())
+        //     flashcard.append(finalBtn)
+        // } 
+        else {
             flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
+            showConfetti()
         }
     })
         .catch(console.log)
@@ -122,12 +150,15 @@ const displayFlashcard = (flashcardObj) => {
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
+    exampleButton.className = 'flashcard-button'
     exampleButton.innerText = 'Need a example? Click here!'
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
     hintButton.setAttribute('data-id', flashcardObj.id)
+    hintButton.className = 'flashcard-button'
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
+    answerButton.className = 'flashcard-button'
     answerButton.innerText = 'Press any key to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
