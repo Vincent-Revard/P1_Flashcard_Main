@@ -23,6 +23,24 @@ body{
     cursor:pointer;
 }
 
+
+#sidebar {
+    height: 160px;
+    width: 160px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-right: 30px;
+    background-color: rgb(255, 242, 0);
+    border-radius: 15px 50px 30px;
+    color: black;
+}
+
+#sidebar p{
+    padding: 2px;
+    cursor:pointer;
+}
+
 #sidebar {
     height: 160px;
     width: 160px;
