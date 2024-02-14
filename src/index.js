@@ -30,7 +30,7 @@ const displayAllSelectableCategories = () => {
 }
 
 
-//! build selectableCategory functions
+//!  SelectableCategory functions
     const selectableCat0 = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
@@ -61,7 +61,7 @@ const displayAllSelectableCategories = () => {
         getFlashCardsData(`${httpURL}${sideBar.className}`)
     }
 
-
+//! Toggle display full flashcard question list
 const toggle = () => {
     listOfQuestionsInUl.innerHTML = ' '
     const toggleBtn = document.createElement('button')
@@ -164,15 +164,16 @@ const displayFlashcard = (flashcardObj) => {
 
     const nextBtn = document.createElement('button')
     nextBtn.name = 'nextCardBtn'
+    nextBtn.innerText = 'NEXT CARD'
 
     const deleteBtn = document.createElement('button')
     deleteBtn.name = 'deleteBtn'
     deleteBtn.innerText = 'Delete this flashcard?'
 
+    //! Manually created array of all elements created 
     flashcardArray = [flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn]
 
     //! Flashcard elements helper functions
-
     const addFlashCardAttributes = (elements) => {
         elements.forEach(element => {
                 element.setAttribute('data-id', flashcardObj.id)
@@ -180,7 +181,7 @@ const displayFlashcard = (flashcardObj) => {
                 element.setAttribute('id', `${element.name}`)
         })
 }  
-
+    //! Mass append elements to page by input array
     const massAppendToFlashcard = (elements) => {
         elements.forEach(element => flashcard.append(element))
 }
@@ -201,11 +202,10 @@ const displayFlashcard = (flashcardObj) => {
     })
 
     nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
-    nextBtn.innerText = 'NEXT CARD'
  
     deleteBtn.addEventListener('click', triggerDeleteBtn) // click event to invoke triggerDeleteBtn) 
 
-    //! Appends mass appends elements to webpage (flashcard) and add attributes
+    //! Invokes functions to append elements to webpage (flashcard) and add attributes
     addFlashCardAttributes(flashcardArray)
     massAppendToFlashcard(flashcardArray) //invoking with listed array of elements
 }
