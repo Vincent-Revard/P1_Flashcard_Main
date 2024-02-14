@@ -8,7 +8,7 @@ const newFlashcard = document.querySelector('#new-flashcard')
 const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const sideBar = document.querySelector("#sidebar")
-const allCards = document.querySelector('#all-cards')
+const buttonHolder = document.querySelector('#button-holder')
 const listOfQuestionsInUl = document.querySelector('#list-of-questions')
 const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
@@ -25,7 +25,9 @@ const displayAllSelectableCategories = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.style.display = 'none'
+        buttonHolder.innerHTML = ''
+        toggle()
         getJSON(`${url}${currentCategory}`)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
@@ -35,7 +37,6 @@ const displayAllSelectableCategories = () => {
         .catch(console.log)
 }
 )
-
     const html = document.createElement('p')
     html.innerText = selectableCategories[1]
     html.addEventListener('click', () => {
@@ -43,7 +44,9 @@ const displayAllSelectableCategories = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.style.display = 'none'
+        buttonHolder.innerHTML = ''
+        toggle()
         getJSON(`${url}${currentCategory}`)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
@@ -53,7 +56,6 @@ const displayAllSelectableCategories = () => {
         .catch(console.log)
 }
 )
-
     const css = document.createElement('p')
     css.innerText = selectableCategories[2]
     css.addEventListener('click', () => {
@@ -61,7 +63,9 @@ const displayAllSelectableCategories = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.style.display = 'none'
+        buttonHolder.innerHTML = ''
+        toggle()
         getJSON(`${url}${currentCategory}`)
             .then((flashcardsData => {
                 displayFlashcard(flashcardsData[0])
@@ -71,19 +75,37 @@ const displayAllSelectableCategories = () => {
             .catch(console.log)
     }
 )
-
 categories.append(javaScript, html, css)
 }
+
+const toggle = () => {
+    listOfQuestionsInUl.innerHTML = ' '
+    const toggleBtn = document.createElement('button')
+    toggleBtn.setAttribute('id', 'display-questions')
+    toggleBtn.innerText = 'Display List of Questions'
+
+
+    toggleBtn.addEventListener('click', () => {
+        let target = listOfQuestionsInUl
+        if(target.style.display === 'block'){
+            target.style.display = 'none';
+        }
+        else {
+            target.style.display = 'block'
+        }
+    })
+
+    buttonHolder.append(toggleBtn)
+}
+
 
 //! Displays all questions using forEach() for clicked category
 const displayAllQuestions = (flashcardObj) => {
     const li = document.createElement('li')
     li.className = 'card-list'
     li.setAttribute('data-id', flashcardObj.id)
-    
     const h5 = document.createElement('h5')
     h5.innerText = flashcardObj.question
-    
     listOfQuestionsInUl.append(li)
     li.append(h5)
 }
@@ -126,7 +148,7 @@ const triggerNextBtn = () => {
         //     flashcard.append(finalBtn)
         // } 
         else {
-            flashcard.innerText = 'Set complete. \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
+            flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
             showConfetti()
         }
     })
@@ -151,17 +173,20 @@ const displayFlashcard = (flashcardObj) => {
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
     exampleButton.setAttribute('id', 'exampleBtn')
+    exampleButton.setAttribute('class', 'flashcardBtn')
     exampleButton.innerText = 'Need a example? Click here!'
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
     hintButton.setAttribute('data-id', flashcardObj.id)
     hintButton.setAttribute('id', 'hintBtn')
+    hintButton.setAttribute('class', 'flashcardBtn')
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
     answerButton.setAttribute('id', 'answerBtn')
     answerButton.innerText = 'Press ENTER to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
+    nextBtn.setAttribute('class', 'flashcardBtn')
 
     //! Will be used for delete button in the future. Not for the current project
     // const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
