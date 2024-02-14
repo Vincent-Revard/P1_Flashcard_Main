@@ -12,16 +12,26 @@ const buttonHolder = document.querySelector('#button-holder')
 const listOfQuestionsInUl = document.querySelector('#list-of-questions')
 const selectableCategories = ['JavaScript', 'HTML', 'CSS']
 
-
-
-//Add Codes
 const displayAllSelectableCategories = () => {
 
-//! Invoking by pressing on categories to start the application
     const javaScript = document.createElement('p')
     javaScript.innerText = selectableCategories[0]
-    javaScript.addEventListener('click', () => {
-        let currentCategory = selectableCategories[0]
+    const html = document.createElement('p')
+    html.innerText = selectableCategories[1]
+    const css = document.createElement('p')
+    css.innerText = selectableCategories[2]
+
+//! Invoking by pressing on categories to start the application
+    javaScript.addEventListener('click', selectableCat0)
+    html.addEventListener('click', selectableCat1)
+    css.addEventListener('click', selectableCat2)
+
+    categories.append(javaScript, html, css)
+}
+
+
+//! build selectableCategory functions
+    const selectableCat0 = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
@@ -29,17 +39,9 @@ const displayAllSelectableCategories = () => {
         buttonHolder.innerHTML = ''
         toggle()
         getFlashCardsData(`${httpURL}${sideBar.className}`)
-        // .then((flashcardsData => {
-        //     displayFlashcard(flashcardsData[0])
-        //     flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
-        //     }
-        // ))
-        // .catch(console.log)
-    })
-    const html = document.createElement('p')
-    html.innerText = selectableCategories[1]
-    html.addEventListener('click', () => {
-        let currentCategory = selectableCategories[1]
+    }
+
+    const selectableCat1 = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
@@ -47,18 +49,9 @@ const displayAllSelectableCategories = () => {
         buttonHolder.innerHTML = ''
         toggle()
         getFlashCardsData(`${httpURL}${sideBar.className}`)
-        // getJSON(`${url}${currentCategory}`)
-        // .then((flashcardsData => {
-        //     displayFlashcard(flashcardsData[0])
-        //     flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData))
-        //     }
-        // ))
-        // .catch(console.log)
-    })
-    const css = document.createElement('p')
-    css.innerText = selectableCategories[2]
-    css.addEventListener('click', () => {
-        let currentCategory = selectableCategories[2]
+    }
+
+    const selectableCat2 = () => {
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
         i = 0;
         listOfQuestionsInUl.innerHTML = ''
@@ -66,17 +59,8 @@ const displayAllSelectableCategories = () => {
         buttonHolder.innerHTML = ''
         toggle()
         getFlashCardsData(`${httpURL}${sideBar.className}`)
-    //     getJSON(`${url}${currentCategory}`)
-    //         .then((flashcardsData => {
-    //             displayFlashcard(flashcardsData[0])
-    //             flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
-    //             }
-    //         ))
-    //         .catch(console.log)
-    // 
-    })
-categories.append(javaScript, html, css)
-}
+    }
+
 
 const toggle = () => {
     listOfQuestionsInUl.innerHTML = ' '
@@ -139,14 +123,6 @@ const triggerNextBtn = () => {
             displayFlashcard(slicedFlashCardObj[i])
             i++
         } 
-        // else if(i >= slicedFlashCardObj.length - 1){
-        //     displayFlashcard(slicedFlashCardObj[i])
-        //     nextBtn.remove()
-        //     const finalBtn = createElement('button')
-        //     finalBtn.innerText = 'LAST CARD'
-        //     finalBtn.addEventListener('click', showConfetti())
-        //     flashcard.append(finalBtn)
-        // } 
         else {
             flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
             showConfetti()
@@ -156,7 +132,7 @@ const triggerNextBtn = () => {
         .catch(console.log)
 }
 
-const triggerDeleteBtn = () => deleteFlashCard(flashcard.getAttribute('data-id'))
+const triggerDeleteBtn = () => deleteFlashCard(flashcard.getAttribute('data-id')) // higher order function to invoke delete json request
 
 
 //! Displays ONE flashcard
@@ -301,7 +277,7 @@ const deleteFlashCard = (id) => {
         }
     })
     .then(res => res.json())
-    .then(deletedFlashCard => console.log(deletedFlashCard))
+    .then(deletedFlashCard => flashcard.innerText = console.log(deletedFlashCard))
 }
 
 displayAllSelectableCategories()
