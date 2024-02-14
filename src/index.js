@@ -9,7 +9,7 @@ const submitBtn = document.querySelector('#submitbtn')
 const categories = document.querySelector('#categories')
 const sideBar = document.querySelector("#sidebar")
 const allCards = document.querySelector('#all-cards')
-const listOfCardsInUl = document.querySelector('#list-of-cards')
+const listOfQuestionsInUl = document.querySelector('#list-of-questions')
 const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
 
 
@@ -24,8 +24,8 @@ const displayAllSelectableCategories = () => {
         let currentCategory = selectableCategories[0]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
         i = 0;
-        listOfCardsInUl.innerHTML = ''
-        listOfCardsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.innerHTML = ''
+        listOfQuestionsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
@@ -42,8 +42,8 @@ const displayAllSelectableCategories = () => {
         let currentCategory = selectableCategories[1]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
         i = 0;
-        listOfCardsInUl.innerHTML = ''
-        listOfCardsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.innerHTML = ''
+        listOfQuestionsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
         .then((flashcardsData => {
             displayFlashcard(flashcardsData[0])
@@ -60,8 +60,8 @@ const displayAllSelectableCategories = () => {
         let currentCategory = selectableCategories[2]
         sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
         i = 0;
-        listOfCardsInUl.innerHTML = ''
-        listOfCardsInUl.innerText = 'List of Questions'
+        listOfQuestionsInUl.innerHTML = ''
+        listOfQuestionsInUl.innerText = 'List of Questions'
         getJSON(`${url}${currentCategory}`)
             .then((flashcardsData => {
                 displayFlashcard(flashcardsData[0])
@@ -84,7 +84,7 @@ const displayAllQuestions = (flashcardObj) => {
     const h5 = document.createElement('h5')
     h5.innerText = flashcardObj.question
     
-    listOfCardsInUl.append(li)
+    listOfQuestionsInUl.append(li)
     li.append(h5)
 }
 
@@ -150,16 +150,16 @@ const displayFlashcard = (flashcardObj) => {
 
     //! setting attribute and text of the buttons
     exampleButton.setAttribute('data-id', flashcardObj.id)
-    exampleButton.className = 'flashcard-button'
+    exampleButton.setAttribute('id', 'exampleBtn')
     exampleButton.innerText = 'Need a example? Click here!'
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
     hintButton.setAttribute('data-id', flashcardObj.id)
-    hintButton.className = 'flashcard-button'
+    hintButton.setAttribute('id', 'hintBtn')
     const answerButton = document.createElement('p')
     answerButton.setAttribute('data-id', flashcardObj.id)
-    answerButton.className = 'flashcard-button'
-    answerButton.innerText = 'Press any key to reveal answer'
+    answerButton.setAttribute('id', 'answerBtn')
+    answerButton.innerText = 'Press ENTER to reveal answer'
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
 
@@ -178,7 +178,9 @@ const displayFlashcard = (flashcardObj) => {
     })
 
     document.addEventListener('keydown', () => {
-        answerButton.innerText = flashcardObj.answer
+        if(event.key === 'Enter'){
+            answerButton.innerText = flashcardObj.answer
+        }
     })
 
     //! Cycle through all data with click of next button
@@ -187,7 +189,7 @@ const displayFlashcard = (flashcardObj) => {
 
     //! Appends information to webpage (flashcard)
     flashcardQuestion.innerText = flashcardObj.question
-    flashcard.append(flashcardQuestion, hintButton, answerButton, exampleButton, nextBtn)
+    flashcard.append(flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn)
 
 
 }
