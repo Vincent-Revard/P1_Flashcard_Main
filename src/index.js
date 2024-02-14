@@ -147,25 +147,26 @@ const displayFlashcard = (flashcardObj) => {
     //! Creating elements to our flashcard
     //! setting attribute and text of the buttons
     const flashcardQuestion = document.createElement('h3')
+    flashcardQuestion.name = 'nextCardBtn'
     flashcardQuestion.innerText = flashcardObj.question
 
     const exampleButton = document.createElement('button')
-    exampleButton.setAttribute('id', 'exampleBtn')
+    exampleButton.name = 'exampleBtn'
     exampleButton.innerText = 'Need a example? Click here!'
 
     const hintButton = document.createElement('button')
+    hintButton.name = 'hintBtn'
     hintButton.innerText = 'Need a hint? Click here!'
-    hintButton.setAttribute('id', 'hintBtn')
 
     const answerButton = document.createElement('p')
-    answerButton.setAttribute('id', 'answerBtn')
+    answerButton.name = 'answerBtn'
     answerButton.innerText = 'Press ENTER to reveal answer'
 
     const nextBtn = document.createElement('button')
-    nextBtn.setAttribute('id', 'nextCardBtn')
+    nextBtn.name = 'nextCardBtn'
 
     const deleteBtn = document.createElement('button')
-    deleteBtn.setAttribute('id', 'deleteBtn')
+    deleteBtn.name = 'deleteBtn'
     deleteBtn.innerText = 'Delete this flashcard?'
 
     flashcardArray = [flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn]
@@ -176,6 +177,7 @@ const displayFlashcard = (flashcardObj) => {
         elements.forEach(element => {
                 element.setAttribute('data-id', flashcardObj.id)
                 element.setAttribute('class', 'flashcardBtn')
+                element.setAttribute('id', `${element.name}`)
         })
 }  
 
