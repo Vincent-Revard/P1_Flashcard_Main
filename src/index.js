@@ -1,5 +1,5 @@
 // Global Variables
-const url = 'http://localhost:3000/'
+const httpURL = 'http://localhost:3000/'
 const javascriptURL = 'http://localhost:3000/JavaScript'
 const htmlURL = 'http://localhost:3000/HTML'
 const cssURL = 'http://localhost:3000/CSS'
@@ -10,7 +10,7 @@ const categories = document.querySelector('#categories')
 const sideBar = document.querySelector("#sidebar")
 const buttonHolder = document.querySelector('#button-holder')
 const listOfQuestionsInUl = document.querySelector('#list-of-questions')
-const selectableCategories = ['JavaScript', 'HTML', 'CSS'];
+const selectableCategories = ['JavaScript', 'HTML', 'CSS']
 
 
 
@@ -28,15 +28,14 @@ const displayAllSelectableCategories = () => {
         listOfQuestionsInUl.style.display = 'none'
         buttonHolder.innerHTML = ''
         toggle()
-        getJSON(`${url}${currentCategory}`)
-        .then((flashcardsData => {
-            displayFlashcard(flashcardsData[0])
-            flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
-            }
-        ))
-        .catch(console.log)
-}
-)
+        getFlashCardsData(`${httpURL}${sideBar.className}`)
+        // .then((flashcardsData => {
+        //     displayFlashcard(flashcardsData[0])
+        //     flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
+        //     }
+        // ))
+        // .catch(console.log)
+    })
     const html = document.createElement('p')
     html.innerText = selectableCategories[1]
     html.addEventListener('click', () => {
@@ -47,15 +46,15 @@ const displayAllSelectableCategories = () => {
         listOfQuestionsInUl.style.display = 'none'
         buttonHolder.innerHTML = ''
         toggle()
-        getJSON(`${url}${currentCategory}`)
-        .then((flashcardsData => {
-            displayFlashcard(flashcardsData[0])
-            flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData))
-            }
-        ))
-        .catch(console.log)
-}
-)
+        getFlashCardsData(`${httpURL}${sideBar.className}`)
+        // getJSON(`${url}${currentCategory}`)
+        // .then((flashcardsData => {
+        //     displayFlashcard(flashcardsData[0])
+        //     flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData))
+        //     }
+        // ))
+        // .catch(console.log)
+    })
     const css = document.createElement('p')
     css.innerText = selectableCategories[2]
     css.addEventListener('click', () => {
@@ -66,15 +65,16 @@ const displayAllSelectableCategories = () => {
         listOfQuestionsInUl.style.display = 'none'
         buttonHolder.innerHTML = ''
         toggle()
-        getJSON(`${url}${currentCategory}`)
-            .then((flashcardsData => {
-                displayFlashcard(flashcardsData[0])
-                flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
-                }
-            ))
-            .catch(console.log)
-    }
-)
+        getFlashCardsData(`${httpURL}${sideBar.className}`)
+    //     getJSON(`${url}${currentCategory}`)
+    //         .then((flashcardsData => {
+    //             displayFlashcard(flashcardsData[0])
+    //             flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
+    //             }
+    //         ))
+    //         .catch(console.log)
+    // 
+    })
 categories.append(javaScript, html, css)
 }
 
@@ -133,7 +133,7 @@ const showConfetti = () => {
 
 const triggerNextBtn = () => {
 
-    getJSON(`${url}${sideBar.className}`).then((flashcardObj) => {
+    getJSON(`${httpURL}${sideBar.className}`).then((flashcardObj) => {
         slicedFlashCardObj = flashcardObj.slice(1) // uses .slice(1) on the object to pull the first card out on next click
         if (i < slicedFlashCardObj.length) {
             displayFlashcard(slicedFlashCardObj[i])
@@ -150,12 +150,13 @@ const triggerNextBtn = () => {
         else {
             flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
             showConfetti()
+            flashcard.setAttribute('data-id', 'N/A')
         }
     })
         .catch(console.log)
 }
 
-
+const triggerDeleteBtn = () => deleteFlashCard(flashcard.getAttribute('data-id'))
 
 
 //! Displays ONE flashcard
@@ -163,6 +164,7 @@ const triggerNextBtn = () => {
 const displayFlashcard = (flashcardObj) => {
     //! Empties out the webpage
     flashcard.innerHTML = ''
+    flashcard.setAttribute('data-id', flashcardObj.id)
     const startText = document.querySelector('#start-text')
     startText.innerHTML = ''
 
@@ -187,6 +189,11 @@ const displayFlashcard = (flashcardObj) => {
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
     nextBtn.setAttribute('class', 'flashcardBtn')
+    const deleteBtn = document.createElement('button')
+    deleteBtn.setAttribute('data-id', flashcardObj.id)
+    deleteBtn.setAttribute('id', 'deleteBtn')
+    deleteBtn.setAttribute('class', 'flashcardBtn')
+    deleteBtn.innerText = 'Delete this flashcard?'
 
     //! Will be used for delete button in the future. Not for the current project
     // const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
@@ -212,10 +219,12 @@ const displayFlashcard = (flashcardObj) => {
     nextBtn.addEventListener('click', triggerNextBtn)
     nextBtn.innerText = 'NEXT CARD'
 
+    //! click event to invoke triggerDeleteBtn) 
+    deleteBtn.addEventListener('click', triggerDeleteBtn)
+
     //! Appends information to webpage (flashcard)
     flashcardQuestion.innerText = flashcardObj.question
-    flashcard.append(flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn)
-
+    flashcard.append(flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn)
 
 }
 
@@ -232,7 +241,7 @@ const addNewFlashcardJavascript = (e) => {
         example: e.target.elements['new-example'].value
     }
 
-    postJSON(`${url}${sideBar.className}`, addedNewFlashcard)
+    postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
         .then((createdFlashCard) => {
             displayFlashcard(createdFlashCard)
         })
@@ -244,8 +253,8 @@ newFlashcard.addEventListener('submit', addNewFlashcardJavascript)
 
 //Index Helper
 
-const getJSON = (url) => {
-    return fetch(`${url}`)
+const getJSON = (theurl, category) => {
+    return fetch(theurl, category)
         .then((resp) => {
             if (resp.ok) {
                 return resp.json()
@@ -254,6 +263,17 @@ const getJSON = (url) => {
             }
         })
 }
+
+//! function will simplify selectCategory functions
+const getFlashCardsData = () => {
+    getJSON(`${httpURL}${sideBar.className}`)
+        .then((flashcardsData) => {
+            displayFlashcard(flashcardsData[0])
+            flashcardsData.forEach(flashcardData => displayAllQuestions(flashcardData)) 
+    })
+        .catch(console.log)
+}
+
 
 const postJSON = (url, data) => {
     const configObj = {
@@ -271,6 +291,17 @@ const postJSON = (url, data) => {
                 throw resp.statusText
             }
         })
+}
+
+const deleteFlashCard = (id) => {
+    fetch(`${httpURL}${sideBar.className}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(deletedFlashCard => console.log(deletedFlashCard))
 }
 
 displayAllSelectableCategories()

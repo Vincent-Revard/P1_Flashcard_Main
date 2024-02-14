@@ -184,3 +184,8 @@ body{
     padding-top: 50px;
     padding-left: 25px;
 }
+
+#deleteBtn{
+    margin-top: 72px;
+    margin-left: 20px;
+}
