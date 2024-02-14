@@ -145,36 +145,43 @@ const displayFlashcard = (flashcardObj) => {
     startText.innerHTML = ''
 
     //! Creating elements to our flashcard
-    const flashcardQuestion = document.createElement('h3')
-    const exampleButton = document.createElement('button')
-
     //! setting attribute and text of the buttons
-    exampleButton.setAttribute('data-id', flashcardObj.id)
+    const flashcardQuestion = document.createElement('h3')
+    flashcardQuestion.innerText = flashcardObj.question
+
+    const exampleButton = document.createElement('button')
     exampleButton.setAttribute('id', 'exampleBtn')
-    exampleButton.setAttribute('class', 'flashcardBtn')
     exampleButton.innerText = 'Need a example? Click here!'
+
     const hintButton = document.createElement('button')
     hintButton.innerText = 'Need a hint? Click here!'
-    hintButton.setAttribute('data-id', flashcardObj.id)
     hintButton.setAttribute('id', 'hintBtn')
-    hintButton.setAttribute('class', 'flashcardBtn')
+
     const answerButton = document.createElement('p')
-    answerButton.setAttribute('data-id', flashcardObj.id)
     answerButton.setAttribute('id', 'answerBtn')
     answerButton.innerText = 'Press ENTER to reveal answer'
+
     const nextBtn = document.createElement('button')
     nextBtn.setAttribute('id', 'nextCardBtn')
-    nextBtn.setAttribute('class', 'flashcardBtn')
+
     const deleteBtn = document.createElement('button')
-    deleteBtn.setAttribute('data-id', flashcardObj.id)
     deleteBtn.setAttribute('id', 'deleteBtn')
-    deleteBtn.setAttribute('class', 'flashcardBtn')
     deleteBtn.innerText = 'Delete this flashcard?'
 
-    //! Will be used for delete button in the future. Not for the current project
-    // const selectFirstbtnH = document.querySelector(`div#flashcard > .p > button[data-id='${flashcardObj.id}']`)
-    // const selectSecondbtnA = document.querySelector(`div#flashcard > .p > button > button[data-id='${flashcardObj.id}']`)
-    // const selectCurrentFlashcardSet = document.querySelector(`div#flashcard[data-id='${flashcardObj.id}']`)
+    flashcardArray = [flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn]
+
+    //! Flashcard elements helper functions
+
+    const addFlashCardAttributes = (elements) => {
+        elements.forEach(element => {
+                element.setAttribute('data-id', flashcardObj.id)
+                element.setAttribute('class', 'flashcardBtn')
+        })
+}  
+
+    const massAppendToFlashcard = (elements) => {
+        elements.forEach(element => flashcard.append(element))
+}
 
     //! EventListeners
     exampleButton.addEventListener('click', () => {
@@ -191,17 +198,14 @@ const displayFlashcard = (flashcardObj) => {
         }
     })
 
-    //! Cycle through all data with click of next button
-    nextBtn.addEventListener('click', triggerNextBtn)
+    nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
     nextBtn.innerText = 'NEXT CARD'
+ 
+    deleteBtn.addEventListener('click', triggerDeleteBtn) // click event to invoke triggerDeleteBtn) 
 
-    //! click event to invoke triggerDeleteBtn) 
-    deleteBtn.addEventListener('click', triggerDeleteBtn)
-
-    //! Appends information to webpage (flashcard)
-    flashcardQuestion.innerText = flashcardObj.question
-    flashcard.append(flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn)
-
+    //! Appends mass appends elements to webpage (flashcard) and add attributes
+    addFlashCardAttributes(flashcardArray)
+    massAppendToFlashcard(flashcardArray) //invoking with listed array of elements
 }
 
 
