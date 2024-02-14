@@ -2,9 +2,9 @@
 
 Flashcard project is an application that can be used to create and test your knowledge of the given topics (JavaScript, HTML, CSS). 
 
-User is able to go through existing questions by pressing the next button on the page. User is able to submit their own question/example/answer by using the form below. User is also able to change categories by pressing on the category that they would like to study.
+User is able to go through existing questions by pressing the next button on the page, submit their own question/example/hint/answer by using the form below, change categories by pressing on the category that they would like to study, and delete the flashcard.
 
-We plan to implement features such as editing the flashcard, answer input, and answer input comparison to the actual answer. 
+We plan to implement features such as editing the flashcard, answer input, user accounts, and answer input comparison to the actual answer. 
 
 ## Installation
 
@@ -18,8 +18,10 @@ We plan to implement features such as editing the flashcard, answer input, and a
 
 ## Credits
 Vincent Revard: https://github.com/Vincent-Revard
-Brandon: 
+Brandon Tucker: https://github.com/Brand1n
 Soo Jung Kim: https://github.com/soojkim0106
+
+Confetti Button: https://codepen.io/ieatwebsites/pen/KKBvywP
 
 ## Contributing
 

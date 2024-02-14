@@ -49,7 +49,7 @@ const displayFlashcard = (flashcardObj) => {
     //! Creating elements to our flashcard
     //! setting attribute and text of the buttons
     const flashcardQuestion = document.createElement('h3')
-    flashcardQuestion.name = 'nextCardBtn'
+    flashcardQuestion.name = 'cardQuestion'
     flashcardQuestion.innerText = flashcardObj.question
 
     const exampleButton = document.createElement('button')
@@ -105,7 +105,7 @@ const displayFlashcard = (flashcardObj) => {
 
     nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
  
-    deleteBtn.addEventListener('click', triggerDeleteBtn) // click event to invoke triggerDeleteBtn) 
+    deleteBtn.addEventListener('click', triggerDelAlertConfirm) // click event to invoke triggerDeleteBtn) 
 
     //! Invokes functions to append elements to webpage (flashcard) and add attributes
     addFlashCardAttributes(flashcardArray)
@@ -181,8 +181,15 @@ const triggerNextBtn = () => {
     })
         .catch(console.log)
 }
-
-const triggerDeleteBtn = () => deleteFlashCard(flashcard.getAttribute('data-id')) // higher order function to invoke delete json request
+const triggerDelAlertConfirm = () => {
+if(confirm('Are you sure?') === true){
+    // window.alert(`"${flashcard.question}" has been deleted`) //! THIS WILL NOT WORK - GIVES UNDEFINED FOR FLASHCARD.QUESTION
+    window.alert(`The selected flashcard has been deleted`)
+    deleteFlashCard(flashcard.getAttribute('data-id'))
+} else {
+    window.alert('Cancelled Delete: You decided you can actually do this question and won\'t give up and delete it')
+}
+}
 
 //! Creating the create new flashcard form
 const addNewFlashcardJavascript = (e) => {
@@ -195,49 +202,31 @@ const addNewFlashcardJavascript = (e) => {
         example: e.target.elements['new-example'].value
     }
 
-const formInvalid = flashcard.className === '' || 'N/A'
-const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint,addedNewFlashcard.answer, addedNewFlashcard.example]
-if ((formInvalid) && (formIncomplete.some(value => value.trim() === ''))){
-    alert("Select a category before submitting a new flashcard!")
-}else if ((formIncomplete.some(value => value.trim() || (formInvalid) === ''))){
-        alert("You must fill out all form inputs")
-        }else {
-    postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
-        .then((createdFlashcard) => {
-            displayFlashcard(createdFlashcard)
-            window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
-        })
-    e.target.reset()
-}}
+    const categoryIsInvalid = (sideBar.className === '')
+    const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint, addedNewFlashcard.answer, addedNewFlashcard.example].some(value => value.trim() === '')
 
-// if (formInvalid) {
-//     alert("Select a category before submitting a new flashcard!")
-// }else if (formIncomplete.some(value => value.trim() === '')){
-//     if (formIncomplete){
-//         alert("You must fill out all form inputs")
-//         }else {
-//     postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
-//         .then((createdFlashcard) => {
-//             displayFlashcard(createdFlashcard)
-//             window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
-//         })
-//     e.target.reset()
-// }}
+        if (categoryIsInvalid && formIncomplete) {
+            debugger
+            alert("Select a category before submitting a new flashcard!")
+            alert("You must fill out all form inputs")
+        } else if (formIncomplete && !categoryIsInvalid) {
+            alert("You must fill out all form inputs")
+            debugger
+        } else if (categoryIsInvalid && !formIncomplete) {
+            alert("Select a category before submitting a new flashcard!")
+            debugger
+        } else {
+            postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
+            .then((createdFlashcard) => {
+                displayFlashcard(createdFlashcard)
+                window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`);
+            })
+            .catch(err => console.log(err))
+        }
+        e.target.reset()
+    }
 
-
-// const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint,addedNewFlashcard.answer, addedNewFlashcard.example].some(value => value.trim() === '')
-// if (formIncomplete){
-//     alert("You must fill out all form inputs")
-// }else {
-//     postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
-//         .then((createdFlashcard) => {
-//             displayFlashcard(createdFlashcard)
-//             window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
-//         })
-//     e.target.reset()
-// }
-// }
-newFlashcard.addEventListener('submit', addNewFlashcardJavascript)
+newFlashcard.addEventListener('submit', addNewFlashcardJavascript);
 
 //!  SelectableCategory functions
 const selectableCat0 = () => {
@@ -253,13 +242,6 @@ const selectableCat1 = () => {
 const selectableCat2 = () => {
     sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
     displaySelectedCategory()
-}
-
-const displayDeletedFlashcard = (flashcard) => {
-    debugger
-    window.alert(`"${flashcard.question}" has been deleted`)
-    // window.alert(`You have deleted the selected flashcard! There is no going back now!`)
-    getFlashCardsData(`${httpURL}${sideBar.className}`)
 }
 
 //Index Helper
@@ -284,7 +266,6 @@ const getFlashCardsData = () => {
     })
         .catch(console.log)
 }
-
 
 const postJSON = (url, data) => {
     const configObj = {
@@ -312,7 +293,7 @@ const deleteFlashCard = (id) => {
         }
     })
     .then(res => res.json())
-    .then(deletedFlashCard => displayDeletedFlashcard(deletedFlashCard))
+    .then(deletedFlashCard => displaySelectedCategory(deletedFlashCard))
 }
 
 displayAllSelectableCategories()
