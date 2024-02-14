@@ -60,6 +60,7 @@ body{
 
 
 .startDiv{
+.startDiv{
     text-align: center; 
     background-color: rgb(184, 184, 177);
     width: 6vw;
@@ -76,6 +77,7 @@ body{
 
 
 .flashcardBtn{
+.flashcardBtn{
     font-size: 15px;
     display: block;
     width: 30%;
@@ -84,8 +86,11 @@ body{
 
 #exampleBtn{
     margin-top: 20px;
+    margin-top: 20px;
 }
 
+#nextCardBtn{
+    margin-top: 20px;
 #nextCardBtn{
     margin-top: 20px;
 }
@@ -101,6 +106,7 @@ canvas#confetti {
 }
 
 .button-53 {
+    background-color: #4fc804;
     background-color: #4fc804;
     border: 0 solid #e5e7eb;
     box-sizing: border-box;
@@ -198,11 +204,36 @@ body{
 
 
 #new-card-form{
+#new-card-form{
     text-align: center;
     padding-top: 100px;
 }
 
 #all-cards{
+    padding-top: 25px;
+}
+
+#confetti-button{
+    margin-left: 15%;
+    margin-top: 15%;
+}
+
+#display-questions{
+    width: 125px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 13px;
+    background-color: rgb(0, 247, 255)
+}
+
+#display-questions:hover{
+    background-color: pink;
+    cursor: pointer;
+}
+
+#button-holder{
+    padding-top: 50px;
+    padding-left: 25px;
     padding-top: 25px;
 }
 
