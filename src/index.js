@@ -29,37 +29,99 @@ const displayAllSelectableCategories = () => {
     categories.append(javaScript, html, css)
 }
 
+const displaySelectedCategory = () => {
+    i = 0;
+    listOfQuestionsInUl.innerHTML = ''
+    listOfQuestionsInUl.style.display = 'none'
+    buttonHolder.innerHTML = ''
+    toggle()
+    getFlashCardsData(`${httpURL}${sideBar.className}`)
+}
 
-//!  SelectableCategory functions
-    const selectableCat0 = () => {
-        sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
-        i = 0;
-        listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.style.display = 'none'
-        buttonHolder.innerHTML = ''
-        toggle()
-        getFlashCardsData(`${httpURL}${sideBar.className}`)
-    }
+//! Displays ONE flashcard
+const displayFlashcard = (flashcardObj) => {
+    //! Empties out the webpage
+    flashcard.innerHTML = ''
+    flashcard.setAttribute('data-id', flashcardObj.id)
+    const startText = document.querySelector('#start-text')
+    startText.innerHTML = ''
 
-    const selectableCat1 = () => {
-        sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
-        i = 0;
-        listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.style.display = 'none'
-        buttonHolder.innerHTML = ''
-        toggle()
-        getFlashCardsData(`${httpURL}${sideBar.className}`)
-    }
+    //! Creating elements to our flashcard
+    //! setting attribute and text of the buttons
+    const flashcardQuestion = document.createElement('h3')
+    flashcardQuestion.name = 'nextCardBtn'
+    flashcardQuestion.innerText = flashcardObj.question
 
-    const selectableCat2 = () => {
-        sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
-        i = 0;
-        listOfQuestionsInUl.innerHTML = ''
-        listOfQuestionsInUl.style.display = 'none'
-        buttonHolder.innerHTML = ''
-        toggle()
-        getFlashCardsData(`${httpURL}${sideBar.className}`)
-    }
+    const exampleButton = document.createElement('button')
+    exampleButton.name = 'exampleBtn'
+    exampleButton.innerText = 'Need a example? Click here!'
+
+    const hintButton = document.createElement('button')
+    hintButton.name = 'hintBtn'
+    hintButton.innerText = 'Need a hint? Click here!'
+
+    const answerText = document.createElement('p')
+    answerText.name = 'answerText'
+    answerText.innerText = 'Press ENTER to reveal answer'
+
+    const nextBtn = document.createElement('button')
+    nextBtn.name = 'nextCardBtn'
+    nextBtn.innerText = 'NEXT CARD'
+
+    const deleteBtn = document.createElement('button')
+    deleteBtn.name = 'deleteBtn'
+    deleteBtn.innerText = 'Delete this flashcard?'
+
+    //! Manually created array of all elements created 
+    flashcardArray = [flashcardQuestion, answerText, hintButton, exampleButton, nextBtn, deleteBtn]
+
+    //! Flashcard elements helper functions
+    const addFlashCardAttributes = (elements) => {
+        elements.forEach(element => {
+                element.setAttribute('data-id', flashcardObj.id)
+                element.setAttribute('class', 'flashcardObject')
+                element.setAttribute('id', `${element.name}`)
+        })
+}  
+    //! Mass append elements to page by input array
+    const massAppendToFlashcard = (elements) => {
+        elements.forEach(element => flashcard.append(element))
+}
+
+    //! EventListeners
+    exampleButton.addEventListener('click', () => {
+        exampleButton.innerText = flashcardObj.example
+    })
+
+    hintButton.addEventListener('click', () => {
+        hintButton.innerText = flashcardObj.hint
+    })
+
+    document.addEventListener('keydown', () => {
+        if(event.key === 'Enter'){
+            answerText.innerText = flashcardObj.answer
+        }
+    })
+
+    nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
+ 
+    deleteBtn.addEventListener('click', triggerDeleteBtn) // click event to invoke triggerDeleteBtn) 
+
+    //! Invokes functions to append elements to webpage (flashcard) and add attributes
+    addFlashCardAttributes(flashcardArray)
+    massAppendToFlashcard(flashcardArray) //invoking with listed array of elements
+}
+
+//! Displays all questions using forEach() for clicked category
+const displayAllQuestions = (flashcardObj) => {
+    const li = document.createElement('li')
+    li.className = 'card-list'
+    li.setAttribute('data-id', flashcardObj.id)
+    const h5 = document.createElement('h5')
+    h5.innerText = flashcardObj.question
+    listOfQuestionsInUl.append(li)
+    li.append(h5)
+}
 
 //! Toggle display full flashcard question list
 const toggle = () => {
@@ -80,18 +142,6 @@ const toggle = () => {
     })
 
     buttonHolder.append(toggleBtn)
-}
-
-
-//! Displays all questions using forEach() for clicked category
-const displayAllQuestions = (flashcardObj) => {
-    const li = document.createElement('li')
-    li.className = 'card-list'
-    li.setAttribute('data-id', flashcardObj.id)
-    const h5 = document.createElement('h5')
-    h5.innerText = flashcardObj.question
-    listOfQuestionsInUl.append(li)
-    li.append(h5)
 }
 
 const showConfetti = () => {
@@ -122,7 +172,7 @@ const triggerNextBtn = () => {
         if (i < slicedFlashCardObj.length) {
             displayFlashcard(slicedFlashCardObj[i])
             i++
-        } 
+        }
         else {
             flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
             showConfetti()
@@ -133,84 +183,6 @@ const triggerNextBtn = () => {
 }
 
 const triggerDeleteBtn = () => deleteFlashCard(flashcard.getAttribute('data-id')) // higher order function to invoke delete json request
-
-
-//! Displays ONE flashcard
-
-const displayFlashcard = (flashcardObj) => {
-    //! Empties out the webpage
-    flashcard.innerHTML = ''
-    flashcard.setAttribute('data-id', flashcardObj.id)
-    const startText = document.querySelector('#start-text')
-    startText.innerHTML = ''
-
-    //! Creating elements to our flashcard
-    //! setting attribute and text of the buttons
-    const flashcardQuestion = document.createElement('h3')
-    flashcardQuestion.name = 'nextCardBtn'
-    flashcardQuestion.innerText = flashcardObj.question
-
-    const exampleButton = document.createElement('button')
-    exampleButton.name = 'exampleBtn'
-    exampleButton.innerText = 'Need a example? Click here!'
-
-    const hintButton = document.createElement('button')
-    hintButton.name = 'hintBtn'
-    hintButton.innerText = 'Need a hint? Click here!'
-
-    const answerButton = document.createElement('p')
-    answerButton.name = 'answerBtn'
-    answerButton.innerText = 'Press ENTER to reveal answer'
-
-    const nextBtn = document.createElement('button')
-    nextBtn.name = 'nextCardBtn'
-    nextBtn.innerText = 'NEXT CARD'
-
-    const deleteBtn = document.createElement('button')
-    deleteBtn.name = 'deleteBtn'
-    deleteBtn.innerText = 'Delete this flashcard?'
-
-    //! Manually created array of all elements created 
-    flashcardArray = [flashcardQuestion, answerButton, hintButton, exampleButton, nextBtn, deleteBtn]
-
-    //! Flashcard elements helper functions
-    const addFlashCardAttributes = (elements) => {
-        elements.forEach(element => {
-                element.setAttribute('data-id', flashcardObj.id)
-                element.setAttribute('class', 'flashcardBtn')
-                element.setAttribute('id', `${element.name}`)
-        })
-}  
-    //! Mass append elements to page by input array
-    const massAppendToFlashcard = (elements) => {
-        elements.forEach(element => flashcard.append(element))
-}
-
-    //! EventListeners
-    exampleButton.addEventListener('click', () => {
-        exampleButton.innerText = flashcardObj.example
-    })
-
-    hintButton.addEventListener('click', () => {
-        hintButton.innerText = flashcardObj.hint
-    })
-
-    document.addEventListener('keydown', () => {
-        if(event.key === 'Enter'){
-            answerButton.innerText = flashcardObj.answer
-        }
-    })
-
-    nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
- 
-    deleteBtn.addEventListener('click', triggerDeleteBtn) // click event to invoke triggerDeleteBtn) 
-
-    //! Invokes functions to append elements to webpage (flashcard) and add attributes
-    addFlashCardAttributes(flashcardArray)
-    massAppendToFlashcard(flashcardArray) //invoking with listed array of elements
-}
-
-
 
 //! Creating the create new flashcard form
 const addNewFlashcardJavascript = (e) => {
@@ -223,20 +195,77 @@ const addNewFlashcardJavascript = (e) => {
         example: e.target.elements['new-example'].value
     }
 
+const formInvalid = flashcard.className === '' || 'N/A'
+const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint,addedNewFlashcard.answer, addedNewFlashcard.example]
+if ((formInvalid) && (formIncomplete.some(value => value.trim() === ''))){
+    alert("Select a category before submitting a new flashcard!")
+}else if ((formIncomplete.some(value => value.trim() || (formInvalid) === ''))){
+        alert("You must fill out all form inputs")
+        }else {
     postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
-        .then((createdFlashCard) => {
-            displayFlashcard(createdFlashCard)
+        .then((createdFlashcard) => {
+            displayFlashcard(createdFlashcard)
+            window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
         })
     e.target.reset()
-}
+}}
 
+// if (formInvalid) {
+//     alert("Select a category before submitting a new flashcard!")
+// }else if (formIncomplete.some(value => value.trim() === '')){
+//     if (formIncomplete){
+//         alert("You must fill out all form inputs")
+//         }else {
+//     postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
+//         .then((createdFlashcard) => {
+//             displayFlashcard(createdFlashcard)
+//             window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
+//         })
+//     e.target.reset()
+// }}
+
+
+// const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint,addedNewFlashcard.answer, addedNewFlashcard.example].some(value => value.trim() === '')
+// if (formIncomplete){
+//     alert("You must fill out all form inputs")
+// }else {
+//     postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
+//         .then((createdFlashcard) => {
+//             displayFlashcard(createdFlashcard)
+//             window.alert(`You have successfully added the flashcard for the question "${createdFlashcard.question}"`)
+//         })
+//     e.target.reset()
+// }
+// }
 newFlashcard.addEventListener('submit', addNewFlashcardJavascript)
 
+//!  SelectableCategory functions
+const selectableCat0 = () => {
+    sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(1)").innerText)
+    displaySelectedCategory()
+}
+
+const selectableCat1 = () => {
+    sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(2)").innerText)
+    displaySelectedCategory()
+}
+
+const selectableCat2 = () => {
+    sideBar.setAttribute('class', document.querySelector("#categories > p:nth-child(3)").innerText)
+    displaySelectedCategory()
+}
+
+const displayDeletedFlashcard = (flashcard) => {
+    debugger
+    window.alert(`"${flashcard.question}" has been deleted`)
+    // window.alert(`You have deleted the selected flashcard! There is no going back now!`)
+    getFlashCardsData(`${httpURL}${sideBar.className}`)
+}
 
 //Index Helper
 
-const getJSON = (theurl, category) => {
-    return fetch(theurl, category)
+const getJSON = (theUrlParam, category) => {
+    return fetch(theUrlParam, category)
         .then((resp) => {
             if (resp.ok) {
                 return resp.json()
@@ -283,7 +312,7 @@ const deleteFlashCard = (id) => {
         }
     })
     .then(res => res.json())
-    .then(deletedFlashCard => flashcard.innerText = console.log(deletedFlashCard))
+    .then(deletedFlashCard => displayDeletedFlashcard(deletedFlashCard))
 }
 
 displayAllSelectableCategories()
