@@ -105,10 +105,10 @@ const displayFlashcard = (flashcardObj) => {
 
     nextBtn.addEventListener('click', triggerNextBtn) // Cycle through all data with click of next button
  
-    deleteBtn.addEventListener('click', triggerDelAlertConfirm) // click event to invoke triggerDeleteBtn) 
+    deleteBtn.addEventListener('click', () => triggerDelAlertConfirm(flashcardObj)) // click event to invoke triggerDeleteBtn) 
 
     //! Invokes functions to append elements to webpage (flashcard) and add attributes
-    addFlashCardAttributes(flashcardArray)
+    addFlashCardAttributes(flashcardArray) //invoking with listed array of elements
     massAppendToFlashcard(flashcardArray) //invoking with listed array of elements
 }
 
@@ -130,7 +130,6 @@ const toggle = () => {
     toggleBtn.setAttribute('id', 'display-questions')
     toggleBtn.innerText = 'Display List of Questions'
 
-
     toggleBtn.addEventListener('click', () => {
         let target = listOfQuestionsInUl
         if(target.style.display === 'block'){
@@ -140,7 +139,6 @@ const toggle = () => {
             target.style.display = 'block'
         }
     })
-
     buttonHolder.append(toggleBtn)
 }
 
@@ -153,13 +151,11 @@ const showConfetti = () => {
     confettiButton.setAttribute('class', 'button-53')
 
     const jsConfetti = new JSConfetti()
-
     confettiButton.addEventListener('click', () => {
         jsConfetti.addConfetti({
             emojis: ['💯', '⚡️', '💥', '✨', '💫', '✅'],
         }).then(() => jsConfetti.addConfetti())
     })
-
     flashcard.append(canvas, confettiButton)
 }
 
@@ -176,16 +172,17 @@ const triggerNextBtn = () => {
         else {
             flashcard.innerText = '\n Set complete. \n \n CLICK ON A CATEGORY TO SEE PREVIOUS CARDS AGAIN!'
             showConfetti()
-            flashcard.setAttribute('data-id', 'N/A')
+            sideBar.removeAttribute('class')
         }
     })
         .catch(console.log)
 }
-const triggerDelAlertConfirm = () => {
+const triggerDelAlertConfirm = (flashcard) => {
 if(confirm('Are you sure?') === true){
-    // window.alert(`"${flashcard.question}" has been deleted`) //! THIS WILL NOT WORK - GIVES UNDEFINED FOR FLASHCARD.QUESTION
-    window.alert(`The selected flashcard has been deleted`)
-    deleteFlashCard(flashcard.getAttribute('data-id'))
+    window.alert(`"${flashcard.question}" has been deleted`) //! THIS WILL NOT WORK - GIVES UNDEFINED FOR FLASHCARD.QUESTION
+    // window.alert(`The selected flashcard has been deleted`)
+    
+    deleteFlashCard(flashcard.id)
 } else {
     window.alert('Cancelled Delete: You decided you can actually do this question and won\'t give up and delete it')
 }
@@ -206,15 +203,14 @@ const addNewFlashcardJavascript = (e) => {
     const formIncomplete = [addedNewFlashcard.question, addedNewFlashcard.hint, addedNewFlashcard.answer, addedNewFlashcard.example].some(value => value.trim() === '')
 
         if (categoryIsInvalid && formIncomplete) {
-            debugger
-            alert("Select a category before submitting a new flashcard!")
+            
+            alert("Select a category before submitting a new flashcard and you must fill out all form inputs")
+        } else if (formIncomplete) {
             alert("You must fill out all form inputs")
-        } else if (formIncomplete && !categoryIsInvalid) {
-            alert("You must fill out all form inputs")
-            debugger
-        } else if (categoryIsInvalid && !formIncomplete) {
+            
+        } else if (categoryIsInvalid) {
             alert("Select a category before submitting a new flashcard!")
-            debugger
+            
         } else {
             postJSON(`${httpURL}${sideBar.className}`, addedNewFlashcard)
             .then((createdFlashcard) => {
@@ -292,8 +288,7 @@ const deleteFlashCard = (id) => {
             'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
-    .then(deletedFlashCard => displaySelectedCategory(deletedFlashCard))
+    .then(displaySelectedCategory)
 }
 
 displayAllSelectableCategories()
