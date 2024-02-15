@@ -161,10 +161,8 @@ const showConfetti = () => {
 
 const triggerNextBtn = () => {
 
-    getJSON(`${httpURL}${sideBar.className}`).then((flashcardObj) => {
-        debugger
+    getJSON(`${httpURL}${sideBar.className}`).then((flashcardObj) => {   
         let slicedFlashCardObj = flashcardObj.slice(1) // uses .slice(1) on the object to pull the first card out on next click
-        debugger
         if (i < slicedFlashCardObj.length) {
             displayFlashcard(slicedFlashCardObj[i])
             i++
