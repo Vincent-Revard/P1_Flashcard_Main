@@ -18,7 +18,8 @@ We plan to implement features such as editing the flashcard, answer input, user 
 You can go through the entire set of cards with next button and end it with a bang of confetti! 
 ![](/for_README/p1_project_basic.gif)
 
-You can also submit forms, but make sure you click on categories and fill those boxes out before trying! Deleting flashcard works too!
+You can also submit forms, but make sure you click on categories and fill those boxes out before trying! 
+Deleting flashcard works too!
 ![](/for_README/p1_project_advance.gif)
 
 ## Credits
