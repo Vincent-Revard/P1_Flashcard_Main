@@ -14,12 +14,18 @@ We plan to implement features such as editing the flashcard, answer input, user 
 4. Open up a separate terminal and type open index.html for Mac OS or explorer.exe for Windows.  
 
 ## Usage
-<insert .gif>
+
+You can go through the entire set of cards with next button and end it with a bang of confetti! 
+![](/for_README/p1_project_basic.gif)
+
+You can also submit forms, but make sure you click on categories and fill those boxes out before trying! 
+Deleting flashcard works too!
+![](/for_README/p1_project_advance.gif)
 
 ## Credits
-Vincent Revard: https://github.com/Vincent-Revard
-Brandon Tucker: https://github.com/Brand1n
-Soo Jung Kim: https://github.com/soojkim0106
+Vincent Revard: https://github.com/Vincent-Revard <br />
+Brandon Tucker: https://github.com/Brand1n <br />
+Soo Jung Kim: https://github.com/soojkim0106 <br />
 
 Confetti Button: https://codepen.io/ieatwebsites/pen/KKBvywP
 
